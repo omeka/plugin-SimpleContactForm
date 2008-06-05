@@ -45,9 +45,7 @@ class SimpleContactFormController extends Omeka_Controller_Action {
 		//notify the admin
 		//use the admin email specified in the plugin configuration.  
 		$to_email = get_option('simple_contact_form_forward_to_email');
-		echo 'to email: ' . $to_email;
 		if (!empty($to_email)) {
-			$to_email = get_option('administrator_email'); // use the admin email defined in the site
 			$from_email = $entry->email; //the user's email address
 			$body = $entry->name . " has contacted the admin at " . get_option('site_title') . " with the following message:\n\n" . $entry->message;
 			$title = get_option('site_title') . ' - ' . $entry->name . ' Has Contacted You';
