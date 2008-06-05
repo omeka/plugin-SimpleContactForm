@@ -22,4 +22,7 @@ site is located at:  http://www.yoursite.com/omeka
 and you want your contact page to be located at:
 http://www.yoursite.com/omeka/more/stuff/contact
 then you will enter:  more/stuff/contact
+If you do not change the default settings, the contact form is located at:
+http://www.yoursite.com/omeka/contact
+8. Add a link from your site to your new contact page.
 
