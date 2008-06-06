@@ -104,8 +104,8 @@ function simple_contact_form_config_form() {
 	<?php
 }
 
-function simple_contact_form_config($post) {
-	set_option('simple_contact_form_forward_to_email', $post['simple_contact_form_forward_to_email']);
-	set_option('simple_contact_form_reply_from_email', $post['simple_contact_form_reply_from_email']);
-	set_option('simple_contact_form_page_path', $post['simple_contact_form_page_path']);	
+function simple_contact_form_config() {
+	set_option('simple_contact_form_forward_to_email', $_POST['simple_contact_form_forward_to_email']);
+	set_option('simple_contact_form_reply_from_email', $_POST['simple_contact_form_reply_from_email']);
+	set_option('simple_contact_form_page_path', $_POST['simple_contact_form_page_path']);	
 }
