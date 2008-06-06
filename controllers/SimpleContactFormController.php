@@ -4,11 +4,12 @@
 */
 class SimpleContactFormController extends Omeka_Controller_Action {
 			
-	public function addAction() {
+	public function contactAction() {
+		$renderVars = array('name'=>'', 'email'=>'', 'message'=>'');
 		if (!empty($_POST)) {
-			$this->submitAction();
+			$renderVars = $this->submitAction();
 		}
-		return $this->render('simplecontactform/add.php');					
+		return $this->render('simplecontactform/contact.php', $renderVars);					
 	}
 	
 	public function thankyouAction() {
@@ -16,16 +17,17 @@ class SimpleContactFormController extends Omeka_Controller_Action {
 	}
 	
 	/**
-	 * add entry and redirect to a thank-you page
+	 * email message and redirect to a thank-you page
 	 *
 	 * @return void
 	 **/
 	
 	public function submitAction() {		
-		$message = $_POST['message'];
-		$email = $_POST['email'];
 		$name = $_POST['name'];
-	
+		$email = $_POST['email'];
+		$message = $_POST['message'];
+		$renderVars = array('name'=>$name, 'email'=>$email, 'message'=>$message);
+		
 		if (array_key_exists('email', $_POST)) {
 	
 			$entry = new SimpleContactFormEntry();
@@ -37,7 +39,9 @@ class SimpleContactFormController extends Omeka_Controller_Action {
 				$this->sendEmailNotification($entry);
 				$this->_redirect(get_option('simple_contact_form_thank_you_path')); //change for .10 version
 			} 
-		}		
+		}
+		
+		return $renderVars;		
 	}
 	
 	protected function sendEmailNotification($entry) {
@@ -47,8 +51,8 @@ class SimpleContactFormController extends Omeka_Controller_Action {
 		$to_email = get_option('simple_contact_form_forward_to_email');
 		if (!empty($to_email)) {
 			$from_email = $entry->email; //the user's email address
-			$body = $entry->name . " has contacted the admin at " . get_option('site_title') . " with the following message:\n\n" . $entry->message;
-			$title = get_option('site_title') . ' - ' . $entry->name . ' Has Contacted You';
+				$body = get_option('simple_contact_form_admin_notification_email_message_header') . "\n\n" . $entry->message;
+				$title = get_option('site_title') . ' - ' . get_option('simple_contact_form_admin_notification_email_subject');
 			$header = "From: " . $from_email . "\r\n" .'X-Mailer: PHP/' . phpversion();
 			$res = mail( $to_email, $title, $body, $header);
 		}
@@ -57,8 +61,8 @@ class SimpleContactFormController extends Omeka_Controller_Action {
 		$from_email = get_option('simple_contact_form_reply_from_email');   
 		$to_email = $entry->email; // the user's email address
 		if(!empty($from_email)) {	
-			$body = "Thank you for contacting " . get_option('site_title') . " with the following message:\n\n" . $entry->message;
-			$title = "Thank You For Contacting " . get_option('site_title');
+			$body = get_option('simple_contact_form_user_notification_email_message_header') . "\n\n" . $entry->message;
+			$title = get_option('site_title') . ' - ' . get_option('simple_contact_form_user_notification_email_subject');
 			$header = "From: " . $from_email . "\r\n" .'X-Mailer: PHP/' . phpversion();
 			$res = mail($to_email, $title, $body, $header);		
 		}
