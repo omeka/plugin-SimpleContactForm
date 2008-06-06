@@ -20,6 +20,7 @@
 		<textarea id="message" name="message" rows="20"></textarea>
 
 	<?php
+		echo recaptcha_show();
 		echo submit();
 	 ?>
 	</form>

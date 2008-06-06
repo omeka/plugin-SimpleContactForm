@@ -30,7 +30,7 @@ class SimpleContactFormController extends Omeka_Controller_Action {
 	
 			$entry = new SimpleContactFormEntry();
 	
-			if(!empty($message)) {
+			if(!empty($message) && recaptcha_check()) {
 				$entry->message = $message; 
 				$entry->email = $email;
 				$entry->name = $name;

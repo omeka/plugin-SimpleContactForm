@@ -8,6 +8,9 @@
 * @package SimpleContactForm 
 *
 **/
+
+// External Dependencies:  This plugin depends on the ReCaptcha plugin to prevent spam.
+
 require_once('models/SimpleContactFormEntry.php');
 
 define('SIMPLE_CONTACT_FORM_VERSION', 0.1);
@@ -22,6 +25,22 @@ add_plugin_hook('config', 'simple_contact_form_config');
 add_plugin_hook('install', 'simple_contact_form_install');
 add_plugin_hook('theme_header', 'simple_contact_form_css');
 
+//the css style for the contact page
+function simple_contact_form_css() {
+	echo '<style type="text/css" media="screen">';
+	
+	echo '#simple_contact_form label, #simple_contact_form input, #simple_contact_form textarea {';
+	echo 'display:block;';
+	echo 'float:none;';
+	echo '}';
+	
+	echo '#simple_contact_form input, #simple_contact_form textarea, #recaptcha {';
+	echo 'margin-bottom:1em;';
+	echo '}';
+	
+	echo '</style>';
+}
+
 // the css style for the configure settings
 function simple_contact_form_settings_css() {
 	echo '<style type="text/css" media="screen">';
@@ -32,22 +51,6 @@ function simple_contact_form_settings_css() {
 	echo '}';
 	
 	echo '#simple_contact_form_settings input, #simple_contact_form_settings textarea {';
-	echo 'margin-bottom:1em;';
-	echo '}';
-	
-	echo '</style>';
-}
-
-//the css style for the contact page
-function simple_contact_form_css() {
-	echo '<style type="text/css" media="screen">';
-	
-	echo '#simple_contact_form label, #simple_contact_form input, #simple_contact_form textarea {';
-	echo 'display:block;';
-	echo 'float:none;';
-	echo '}';
-	
-	echo '#simple_contact_form input, #simple_contact_form textarea {';
 	echo 'margin-bottom:1em;';
 	echo '}';
 	
