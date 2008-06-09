@@ -14,6 +14,7 @@ define('SIMPLE_CONTACT_FORM_VERSION', 0.1);
 define('SIMPLE_CONTACT_FORM_PAGE_PATH', 'contact/'); //this can be overwritten in the admin panel, but will be used as the default if no page path is given
 
 define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE', 'Contact Us');
+
 define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS', 'Please send us your comments and suggestions.');
 
 define('SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE', 'Thank You For Your Feedback');
@@ -79,11 +80,11 @@ function simple_contact_form_install() {
 	set_option('simple_contact_form_user_notification_email_subject', SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_SUBJECT);
 	set_option('simple_contact_form_user_notification_email_message_header', SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_MESSAGE_HEADER);
 	
-	set_option('simple_contact_form_add_page_title', SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE);
-	set_option('simple_contact_form_add_page_instructions', SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS);
+	set_option('simple_contact_form_contact_page_title', SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE);
+	set_option('simple_contact_form_contact_page_instructions', SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS);
 	
 	set_option('simple_contact_form_thankyou_page_title', SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE);
-	set_option('simple_contact_form_thankyou_page_title', SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE);
+	set_option('simple_contact_form_thankyou_page_message', SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE);
 
 }
 
