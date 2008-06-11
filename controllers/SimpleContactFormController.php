@@ -9,11 +9,11 @@ class SimpleContactFormController extends Omeka_Controller_Action {
 		if (!empty($_POST)) {
 			$renderVars = $this->submitAction();
 		}
-		return $this->render('simplecontactform/contact.php', $renderVars);					
+		return $this->render('simple-contact-form/contact.php', $renderVars);					
 	}
 	
 	public function thankyouAction() {
-		$this->render('simplecontactform/thankyou.php');
+		$this->render('simple-contact-form/thankyou.php');
 	}
 	
 	/**

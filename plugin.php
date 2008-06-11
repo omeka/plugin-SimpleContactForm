@@ -90,7 +90,7 @@ function simple_contact_form_install() {
 
 function simple_contact_form_initialize() {
 	add_controllers('controllers');
-	add_theme_pages('theme', 'public');
+	add_theme_pages('views/public', 'public');
 }
 
 function simple_contact_form_routes($router) {
