@@ -66,10 +66,15 @@ function simple_contact_form_settings_css() {
 	echo '</style>';
 }
 
+function simple_contact_form_clean_path($path)
+{
+	return trim(trim($path), '/') . '/';
+}
+
 function simple_contact_form_install() {
 	set_option('simple_contact_form_version', SIMPLE_CONTACT_FORM_VERSION);	
 	
-	set_option('simple_contact_form_page_path', SIMPLE_CONTACT_FORM_PAGE_PATH);
+	set_option('simple_contact_form_page_path', simple_contact_form_clean_path(SIMPLE_CONTACT_FORM_PAGE_PATH));
 	
 	set_option('simple_contact_form_reply_from_email', get_option('administrator_email'));
 	set_option('simple_contact_form_forward_to_email', get_option('administrator_email'));	
@@ -96,7 +101,7 @@ function simple_contact_form_initialize() {
 function simple_contact_form_routes($router) {
 	//if the page path is empty then make it the default page path
 	if (trim(get_option('simple_contact_form_page_path')) == '') {
-		set_option('simple_contact_form_page_path', SIMPLE_CONTACT_FORM_PAGE_PATH);
+		set_option('simple_contact_form_page_path', simple_contact_form_clean_path(SIMPLE_CONTACT_FORM_PAGE_PATH));
 	}
 	
 	//add the contact page route
@@ -178,20 +183,16 @@ function simple_contact_form_config_form() {
 	<?php
 }
 
-function simple_contact_form_config() {
-	set_option('simple_contact_form_forward_to_email', $_POST['simple_contact_form_forward_to_email']);
-	set_option('simple_contact_form_reply_from_email', $_POST['simple_contact_form_reply_from_email']);
-	set_option('simple_contact_form_page_path', $_POST['simple_contact_form_page_path']);
-	set_option('simple_contact_form_admin_notification_email_subject', $_POST['simple_contact_form_admin_notification_email_subject']);
-	set_option('simple_contact_form_admin_notification_email_message_header', $_POST['simple_contact_form_admin_notification_email_message_header']);
-	set_option('simple_contact_form_user_notification_email_subject', $_POST['simple_contact_form_user_notification_email_subject']);
-	set_option('simple_contact_form_user_notification_email_message_header', $_POST['simple_contact_form_user_notification_email_message_header']);
-	set_option('simple_contact_form_contact_page_title', $_POST['simple_contact_form_contact_page_title']);
-	set_option('simple_contact_form_contact_page_instructions', $_POST['simple_contact_form_contact_page_instructions']);
-	set_option('simple_contact_form_thankyou_page_title', $_POST['simple_contact_form_thankyou_page_title']);
-	set_option('simple_contact_form_thankyou_page_message', $_POST['simple_contact_form_thankyou_page_message']);
-
-
-
-
+function simple_contact_form_config($post) {
+	set_option('simple_contact_form_forward_to_email', $post['simple_contact_form_forward_to_email']);
+	set_option('simple_contact_form_reply_from_email', $post['simple_contact_form_reply_from_email']);
+	set_option('simple_contact_form_page_path', simple_contact_form_clean_path($post['simple_contact_form_page_path']));
+	set_option('simple_contact_form_admin_notification_email_subject', $post['simple_contact_form_admin_notification_email_subject']);
+	set_option('simple_contact_form_admin_notification_email_message_header', $post['simple_contact_form_admin_notification_email_message_header']);
+	set_option('simple_contact_form_user_notification_email_subject', $post['simple_contact_form_user_notification_email_subject']);
+	set_option('simple_contact_form_user_notification_email_message_header', $post['simple_contact_form_user_notification_email_message_header']);
+	set_option('simple_contact_form_contact_page_title', $post['simple_contact_form_contact_page_title']);
+	set_option('simple_contact_form_contact_page_instructions', $post['simple_contact_form_contact_page_instructions']);
+	set_option('simple_contact_form_thankyou_page_title', $post['simple_contact_form_thankyou_page_title']);
+	set_option('simple_contact_form_thankyou_page_message', $post['simple_contact_form_thankyou_page_message']);
 }
