@@ -1,24 +1,13 @@
 <?php
 class SimpleContactForm_ContactController extends Omeka_Controller_Action
 {    
-	public function init()
-	{
-	}
-	
-    public function indexAction()
-    {
-
-    }
-
 	public function formAction()
 	{		
 		$name = $_POST['name'];
 		$email = $_POST['email'];
 		$message = $_POST['message'];
 		$renderVars = array('name'=>$name, 'email'=>$email, 'message'=>$message);
-		
-		$thankyoupath = simple_contact_form_thankyou_path();
-		
+				
 		if (array_key_exists('email', $_POST)) {
 	
 			$entry = array();
@@ -28,7 +17,7 @@ class SimpleContactForm_ContactController extends Omeka_Controller_Action
 				$entry['email'] = $email;
 				$entry['name'] = $name;
 				$this->sendEmailNotification($entry);
-	            $this->redirect->gotoUrl($thankyoupath);
+	            $this->redirect->gotoRoute(array(), 'simple_contact_form_thankyou');
 			} 
 		}
 		

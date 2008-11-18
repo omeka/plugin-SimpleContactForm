@@ -70,7 +70,7 @@ function simple_contact_form_define_routes($router)
 	$contactformpath = get_option('simple_contact_form_page_path');
 	
 	$router->addRoute(
-	    'simple_contact_form_form_route', 
+	    'simple_contact_form_form', 
 	    new Zend_Controller_Router_Route(
 	        $contactformpath, 
 	        array(
@@ -84,7 +84,7 @@ function simple_contact_form_define_routes($router)
 	$thankyoupath = simple_contact_form_thankyou_path();
 	
 	$router->addRoute(
-	    'simple_contact_form_thankyou_route', 
+	    'simple_contact_form_thankyou', 
 	    new Zend_Controller_Router_Route(
 	        $thankyoupath, 
 	        array(
@@ -147,19 +147,6 @@ function simple_contact_form_clean_path($seed)
 
 function simple_contact_form_thankyou_path()
 {
-	$contactformpath = get_option('simple_contact_form_page_path');
-	
-	$slash = substr($contactformpath, -1);
-	if($slash == '/') 
-	{
-		$slash = ''; 
-	}
-	else
-	{
-		$slash = '/';
-	}
-	$thankyoupath = $contactformpath . $slash . 'thankyou';
-	
-	return $thankyoupath;
+	return rtrim(get_option('simple_contact_form_page_path'), '/') . '/thankyou';
 }
 ?>
