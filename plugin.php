@@ -73,11 +73,7 @@ function simple_contact_form_define_routes($router)
 	    'simple_contact_form_form', 
 	    new Zend_Controller_Router_Route(
 	        $contactformpath, 
-	        array(
-	            'module'       => 'simple-contact-form', 
-	            'controller'   => 'contact', 
-	            'action'       => 'form', 
-	        )
+	        array('module'       => 'simple-contact-form')
 	    )
 	);
 	
@@ -89,7 +85,7 @@ function simple_contact_form_define_routes($router)
 	        $thankyoupath, 
 	        array(
 	            'module'       => 'simple-contact-form', 
-	            'controller'   => 'contact', 
+	            'controller'   => 'index', 
 	            'action'       => 'thankyou', 
 	        )
 	    )

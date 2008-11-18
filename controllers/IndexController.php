@@ -1,7 +1,7 @@
 <?php
-class SimpleContactForm_ContactController extends Omeka_Controller_Action
+class SimpleContactForm_IndexController extends Omeka_Controller_Action
 {    
-	public function formAction()
+	public function indexAction()
 	{		
 		$name = $_POST['name'];
 		$email = $_POST['email'];
