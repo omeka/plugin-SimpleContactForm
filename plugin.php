@@ -64,11 +64,14 @@ function simple_contact_form_uninstall()
 	delete_option('simple_contact_form_add_to_main_navigation');	
 }
 
+/**
+ * Adds 2 routes for the form and the thank you page.
+ **/
 function simple_contact_form_define_routes($router)
-{
-    // Add custom routes based on the page slug.
-	$contactformpath = get_option('simple_contact_form_page_path');
-	
+{   
+    // Force the configured slug to have a trailing slash. 
+	$contactformpath = rtrim(get_option('simple_contact_form_page_path'), '/') . '/';
+
 	$router->addRoute(
 	    'simple_contact_form_form', 
 	    new Zend_Controller_Router_Route(
@@ -76,13 +79,11 @@ function simple_contact_form_define_routes($router)
 	        array('module'       => 'simple-contact-form')
 	    )
 	);
-	
-	$thankyoupath = simple_contact_form_thankyou_path();
-	
+		
 	$router->addRoute(
 	    'simple_contact_form_thankyou', 
 	    new Zend_Controller_Router_Route(
-	        $thankyoupath, 
+	        $contactformpath . 'thankyou', 
 	        array(
 	            'module'       => 'simple-contact-form', 
 	            'controller'   => 'index', 
@@ -122,9 +123,10 @@ function simple_contact_form_config()
 function simple_contact_form_public_navigation_main($nav)
 {
 	$contact_title = get_option('simple_contact_form_contact_page_title');
-	$contact_path = get_option('simple_contact_form_page_path');
 	$contact_add_to_navigation = get_option('simple_contact_form_add_to_main_navigation');
-	if($contact_add_to_navigation == true) $nav[$contact_title] = uri($contact_path);
+	if ($contact_add_to_navigation) {
+	    $nav[$contact_title] = uri(array(), 'simple_contact_form_form');
+	}
 
     return $nav;
 }
@@ -140,9 +142,3 @@ function simple_contact_form_clean_path($seed)
     // Remove all but alphanumeric characters, underscores, and dashes.
     return preg_replace('/[^\w\/-]/i', '', $seed);
 }
-
-function simple_contact_form_thankyou_path()
-{
-	return rtrim(get_option('simple_contact_form_page_path'), '/') . '/thankyou';
-}
-?>
