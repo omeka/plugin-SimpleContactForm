@@ -11,8 +11,14 @@ $contact_page_instructions = get_option('simple_contact_form_contact_page_instru
 $thankyou_page_title = get_option('simple_contact_form_thankyou_page_title');
 $thankyou_page_message = get_option('simple_contact_form_thankyou_page_message');
 $add_to_main_navigation = get_option('simple_contact_form_add_to_main_navigation');
-
+$captcha_public_key = get_option('simple_contact_form_recaptcha_public_key');
+$captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 ?>
+
+<?php if (empty($captcha_public_key) and empty($captcha_private_key)): ?>
+    <p class="error">Please enter your <a href="http://recaptcha.net/">ReCAPTCHA</a> 
+        API keys, or the contact form will be vulnerable to spam.</p>
+<?php endif; ?>
 
 <div class="field">
 <label for="reply_from_email">Reply From Email</label>
@@ -105,6 +111,22 @@ $add_to_main_navigation = get_option('simple_contact_form_add_to_main_navigation
 <label for="thankyou_page_message">Thank You Page Message</label>
 <div class="inputs">
 <textarea class="textinput" type="text" rows="20" cols="60" name="thankyou_page_message" id="thankyou_page_message"><?php echo $thankyou_page_message; ?></textarea>
+<p class="explanation"></p>
+</div>
+</div>
+
+<div class="field">
+<label for="recaptcha_public_key">reCAPTCHA Public Key</label>
+<div class="inputs">
+<input class="textinput" class="textinput" type="text" name="recaptcha_public_key" value="<?php echo $captcha_public_key; ?>" id="recaptcha_public_key" />
+<p class="explanation"></p>
+</div>
+</div>
+
+<div class="field">
+<label for="recaptcha_private_key">reCAPTCHA Private Key</label>
+<div class="inputs">
+<input class="textinput" class="textinput" type="text" name="recaptcha_private_key" value="<?php echo $captcha_private_key; ?>" id="recaptcha_private_key" />
 <p class="explanation"></p>
 </div>
 </div>

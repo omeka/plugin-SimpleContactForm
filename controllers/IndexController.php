@@ -2,31 +2,75 @@
 class SimpleContactForm_IndexController extends Omeka_Controller_Action
 {    
 	public function indexAction()
-	{		
-		$name = $_POST['name'];
-		$email = $_POST['email'];
-		$message = $_POST['message'];
-		$renderVars = array('name'=>$name, 'email'=>$email, 'message'=>$message);
-				
-		if (array_key_exists('email', $_POST)) {
-	
-			$entry = array();
-	
-			if(!empty($message) && !empty($email)) {
-				$entry['message'] = $message; 
+	{	
+	    $captchaObj = $this->_setupCaptcha();
+	    
+	    if ($this->getRequest()->isPost()) {
+	        $name = $_POST['name'];
+    		$email = $_POST['email'];
+    		$message = $_POST['message'];
+    		
+    		// If the form submission is valid, then send out the email
+    		if ($this->_validateFormSubmission($captchaObj)) {
+    		    $entry = array();
+    		    $entry['message'] = $message; 
 				$entry['email'] = $email;
 				$entry['name'] = $name;
 				$this->sendEmailNotification($entry);
 	            $this->redirect->gotoRoute(array(), 'simple_contact_form_thankyou');
-			} 
+    		}
+	    }	
+	    
+	    // Render the HTML for the captcha itself.
+	    // Pass this a blank Zend_View b/c ZF forces it.
+		if ($captchaObj) {
+		    $captcha = $captchaObj->render(new Zend_View);
 		}
 		
-		return $renderVars;
+		
+		$this->view->assign(compact('name','email','message', 'captcha'));
 	}
 	
 	public function thankyouAction()
 	{
 		
+	}
+	
+	protected function _validateFormSubmission($captcha = null)
+	{
+	    $valid = true;
+	    $msg = $this->getRequest()->getPost('message');
+	    $email = $this->getRequest()->getPost('email');
+	    // ZF ReCaptcha ignores the 1st arg.
+	    if ($captcha and !$captcha->isValid('foo', $_POST)) {
+            $this->flashError('Your CAPTCHA submission was invalid, please try again.');
+            $valid = false;
+	    } else if (!Zend_Validate::is($email, 'EmailAddress')) {
+            $this->flashError('Please enter a valid email address.');
+            $valid = false;
+	    } else if (empty($msg)) {
+            $this->flashError('Please enter a message.');
+            $valid = false;
+	    }
+	    
+	    return $valid;
+	}
+	
+	protected function _setupCaptcha()
+	{
+	    $publicKey = get_option('simple_contact_form_recaptcha_public_key');
+	    $privateKey = get_option('simple_contact_form_recaptcha_private_key');
+	    
+	    if (empty($publicKey) or empty($privateKey)) {
+	       return;
+	    }
+	    
+        // Originating request:
+        $captcha = new Zend_Captcha_ReCaptcha(array(
+            'pubKey'=>$publicKey, 
+            'privKey'=>$privateKey));
+
+        return $captcha;
 	}
 	
 	protected function sendEmailNotification($entry) {
