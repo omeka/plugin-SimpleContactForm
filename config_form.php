@@ -15,7 +15,6 @@
     });
 </script>
 
-
 <?php
 $page_path = get_option('simple_contact_form_page_path');
 $reply_from_email = get_option('simple_contact_form_reply_from_email');
@@ -39,18 +38,21 @@ $captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 <?php endif; ?>
 
 <div class="field">
-<label for="reply_from_email">Reply From Email</label>
+<label for="reply_from_email">Reply-From Email</label>
 <div class="inputs">
 <input class="textinput" type="text" name="reply_from_email" value="<?php echo $reply_from_email; ?>" id="reply_from_email" />
-<p class="explanation">The email address that </p>
+<p class="explanation">The address that users can reply to. If blank, your users
+will not be sent confirmation emails of their submissions.</p>
 </div>
 </div>
 
 <div class="field">
-<label for="forward_to_email">Forward To Email</label>
+<label for="forward_to_email">Forward-To Email</label>
 <div class="inputs">
 <input class="textinput" type="text" name="forward_to_email" value="<?php echo $forward_to_email; ?>" id="forward_to_email" />
-<p class="explanation">The email address that receives notifications that someone has submitted a message through contact form.</p>
+<p class="explanation">The email address that receives notifications that
+someone has submitted a message through contact form. If blank, you will not be
+forwarded messages from your users.</p>
 </div>
 </div>
 
@@ -58,7 +60,8 @@ $captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 <label for="admin_notification_email_subject">Email Subject (Admin Notification)</label>
 <div class="inputs">
 <input class="textinput" type="text" name="admin_notification_email_subject" value="<?php echo $admin_notification_email_subject; ?>" id="admin_notification_email_subject" />
-<p class="explanation"></p>
+<p class="explanation">The subject line for the email that is sent to the
+Forward-To email address.</p>
 </div>
 </div>
 
@@ -66,7 +69,7 @@ $captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 <label for="admin_notification_email_message_header">Email Message (Admin Notification)</label>
 <div class="inputs">
 <textarea class="textinput" type="text" rows="20" cols="60" name="admin_notification_email_message_header" id="admin_notification_email_message_header"><?php echo $admin_notification_email_message_header; ?></textarea>
-<p class="explanation"></p>
+<p class="explanation">The beginning of the message that is sent to the Forward-To email address.</p>
 </div>
 </div>
 
@@ -74,7 +77,8 @@ $captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 <label for="user_notification_email_subject">Email Subject (Public Notification)</label>
 <div class="inputs">
 <input class="textinput" type="text" name="user_notification_email_subject" value="<?php echo $user_notification_email_subject; ?>" id="user_notification_email_subject" />
-<p class="explanation"></p>
+<p class="explanation">The subject line of the confirmation email that is sent
+to users who post messages through the form.</p>
 </div>
 </div>
 
@@ -82,7 +86,8 @@ $captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 <label for="user_notification_email_message_header">Email Message (Public Notification)</label>
 <div class="inputs">
 <textarea class="textinput" type="text" rows="20" cols="60" name="user_notification_email_message_header" id="user_notification_email_message_header"><?php echo $user_notification_email_message_header; ?></textarea>
-<p class="explanation"></p>
+<p class="explanation">The beginning of the confirmation email that is sent to
+users who post messages through the form.</p>
 </div>
 </div>
 
@@ -90,7 +95,12 @@ $captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 <label for="page_path">Contact Form Path</label>
 <div class="inputs">
 <input class="textinput" type="text" name="page_path" value="<?php echo $page_path; ?>" id="page_path" />
-<p class="explanation"></p>
+<p class="explanation">The URL path to the contact form. For example, suppose
+your omeka site is located at: <em>http://www.yoursite.com/omeka</em> and you want your
+contact page to be located at: <em>http://www.yoursite.com/omeka/more/stuff/contact</em>
+then you will enter: more/stuff/contact If you do not change the default
+settings, the contact form is located at:
+<em>http://www.yoursite.com/omeka/contact</em></p>
 </div>
 </div>
 
@@ -98,7 +108,7 @@ $captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 <label for="contact_page_title">Contact Page Title</label>
 <div class="inputs">
 <input class="textinput" type="text" name="contact_page_title" value="<?php echo $contact_page_title; ?>" id="contact_page_title" />
-<p class="explanation"></p>
+<p class="explanation">The title of the contact form (not HTML).</p>
 </div>
 </div>
 
@@ -106,7 +116,7 @@ $captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 <label for="contact_page_instructions">Instructions for Contact Page</label>
 <div class="inputs">
 <textarea class="textinput html-editor" type="text" rows="20" cols="60" name="contact_page_instructions" id="contact_page_instructions"><?php echo $contact_page_instructions; ?></textarea>
-<p class="explanation">If you would like to provide specific instructions on the contact form page, add those here.</p>
+<p class="explanation">Any specific instructions to add to the contact form.</p>
 </div>
 </div>
 
@@ -121,7 +131,7 @@ $captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 <label for="thankyou_page_title">Thank You Page Title</label>
 <div class="inputs">
 <input class="textinput" class="textinput" type="text" name="thankyou_page_title" value="<?php echo $thankyou_page_title; ?>" id="thankyou_page_title" />
-<p class="explanation"></p>
+<p class="explanation">The title of the Thank You page (not HTML).</p>
 </div>
 </div>
 
@@ -137,7 +147,9 @@ $captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 <label for="recaptcha_public_key">reCAPTCHA Public Key</label>
 <div class="inputs">
 <input class="textinput" class="textinput" type="text" name="recaptcha_public_key" value="<?php echo $captcha_public_key; ?>" id="recaptcha_public_key" />
-<p class="explanation"></p>
+<p class="explanation">To enable CAPTCHA for your contact form, please obtain a
+<a href="http://recaptcha.net/">ReCAPTCHA</a> API key and enter the relevant
+values.</p>
 </div>
 </div>
 
