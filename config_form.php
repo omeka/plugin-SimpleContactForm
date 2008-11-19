@@ -1,3 +1,21 @@
+<?php echo js('tiny_mce/tiny_mce'); ?>
+<script type="text/javascript" charset="utf-8">
+    Event.observe(window, 'load', function(){
+        //WYSIWYG Editor
+       tinyMCE.init({
+        mode : "specific_textareas",
+       	editor_selector : "html-editor", 
+       	theme: "advanced",
+       	theme_advanced_toolbar_location : "top",
+       	theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,bullist,numlist,link,formatselect",
+    	theme_advanced_buttons2 : "",
+    	theme_advanced_buttons3 : "",
+    	theme_advanced_toolbar_align : "left"
+       });
+    });
+</script>
+
+
 <?php
 $page_path = get_option('simple_contact_form_page_path');
 $reply_from_email = get_option('simple_contact_form_reply_from_email');
@@ -87,7 +105,7 @@ $captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 <div class="field">
 <label for="contact_page_instructions">Instructions for Contact Page</label>
 <div class="inputs">
-<textarea class="textinput" type="text" rows="20" cols="60" name="contact_page_instructions" id="contact_page_instructions"><?php echo $contact_page_instructions; ?></textarea>
+<textarea class="textinput html-editor" type="text" rows="20" cols="60" name="contact_page_instructions" id="contact_page_instructions"><?php echo $contact_page_instructions; ?></textarea>
 <p class="explanation">If you would like to provide specific instructions on the contact form page, add those here.</p>
 </div>
 </div>
@@ -110,7 +128,7 @@ $captcha_private_key = get_option('simple_contact_form_recaptcha_private_key');
 <div class="field">
 <label for="thankyou_page_message">Thank You Page Message</label>
 <div class="inputs">
-<textarea class="textinput" type="text" rows="20" cols="60" name="thankyou_page_message" id="thankyou_page_message"><?php echo $thankyou_page_message; ?></textarea>
+<textarea class="textinput html-editor" type="text" rows="20" cols="60" name="thankyou_page_message" id="thankyou_page_message"><?php echo $thankyou_page_message; ?></textarea>
 <p class="explanation"></p>
 </div>
 </div>

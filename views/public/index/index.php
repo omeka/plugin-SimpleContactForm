@@ -2,12 +2,12 @@
 <h1><?php echo htmlspecialchars(get_option('simple_contact_form_contact_page_title')); ?></h1>
 <div id="primary">
     
-<div id="simplecontactform">
-	<div id="simplecontactforminstructions">
-		<?php echo nls2p(get_option('simple_contact_form_contact_page_instructions')); ?>
+<div id="simple-contact">
+	<div id="form-instructions">
+		<?php echo get_option('simple_contact_form_contact_page_instructions'); // HTML ?>
 	</div>
 	<?php echo flash(); ?>
-	<form name="simple_contact_form" id="simple_contact_form"  method="post" enctype="multipart/form-data" accept-charset="utf-8">
+	<form name="contact_form" id="contact-form"  method="post" enctype="multipart/form-data" accept-charset="utf-8">
         
         <fieldset>
             
