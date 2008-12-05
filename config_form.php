@@ -16,7 +16,6 @@
 </script>
 
 <?php
-$page_path = get_option('simple_contact_form_page_path');
 $reply_from_email = get_option('simple_contact_form_reply_from_email');
 $forward_to_email = get_option('simple_contact_form_forward_to_email');	
 $admin_notification_email_subject = get_option('simple_contact_form_admin_notification_email_subject');
@@ -88,19 +87,6 @@ to users who post messages through the form.</p>
 <textarea class="textinput" type="text" rows="20" cols="60" name="user_notification_email_message_header" id="user_notification_email_message_header"><?php echo $user_notification_email_message_header; ?></textarea>
 <p class="explanation">The beginning of the confirmation email that is sent to
 users who post messages through the form.</p>
-</div>
-</div>
-
-<div class="field">
-<label for="page_path">Contact Form Path</label>
-<div class="inputs">
-<input class="textinput" type="text" name="page_path" value="<?php echo $page_path; ?>" id="page_path" />
-<p class="explanation">The URL path to the contact form. For example, suppose
-your omeka site is located at: <em>http://www.yoursite.com/omeka</em> and you want your
-contact page to be located at: <em>http://www.yoursite.com/omeka/more/stuff/contact</em>
-then you will enter: more/stuff/contact If you do not change the default
-settings, the contact form is located at:
-<em>http://www.yoursite.com/omeka/contact</em></p>
 </div>
 </div>
 

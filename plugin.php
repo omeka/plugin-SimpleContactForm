@@ -33,7 +33,6 @@ add_filter('public_navigation_main', 'simple_contact_form_public_navigation_main
 function simple_contact_form_install()
 {
 	set_option('simple_contact_form_version', SIMPLE_CONTACT_FORM_VERSION);	
-	set_option('simple_contact_form_page_path', SIMPLE_CONTACT_FORM_PAGE_PATH);
 	set_option('simple_contact_form_reply_from_email', get_option('administrator_email'));
 	set_option('simple_contact_form_forward_to_email', get_option('administrator_email'));	
 	set_option('simple_contact_form_admin_notification_email_subject', SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_SUBJECT);
@@ -51,7 +50,6 @@ function simple_contact_form_install()
 function simple_contact_form_uninstall()
 {
 	delete_option('simple_contact_form_version');	
-	delete_option('simple_contact_form_page_path');
 	delete_option('simple_contact_form_reply_from_email');
 	delete_option('simple_contact_form_forward_to_email');	
 	delete_option('simple_contact_form_admin_notification_email_subject');
@@ -69,13 +67,10 @@ function simple_contact_form_uninstall()
  **/
 function simple_contact_form_define_routes($router)
 {   
-    // Force the configured slug to have a trailing slash. 
-	$contactformpath = rtrim(get_option('simple_contact_form_page_path'), '/') . '/';
-
 	$router->addRoute(
 	    'simple_contact_form_form', 
 	    new Zend_Controller_Router_Route(
-	        $contactformpath, 
+	        SIMPLE_CONTACT_FORM_PAGE_PATH, 
 	        array('module'       => 'simple-contact-form')
 	    )
 	);
@@ -83,7 +78,7 @@ function simple_contact_form_define_routes($router)
 	$router->addRoute(
 	    'simple_contact_form_thankyou', 
 	    new Zend_Controller_Router_Route(
-	        $contactformpath . 'thankyou', 
+	        SIMPLE_CONTACT_FORM_PAGE_PATH . 'thankyou', 
 	        array(
 	            'module'       => 'simple-contact-form', 
 	            'controller'   => 'index', 
@@ -101,11 +96,6 @@ function simple_contact_form_config_form()
 
 function simple_contact_form_config()
 {
-	$path = $_POST['page_path'];
-	if(empty($path)) {
-		$path = 'contact/';
-	}
-	set_option('simple_contact_form_page_path', simple_contact_form_clean_path($path));
 	set_option('simple_contact_form_reply_from_email', $_POST['reply_from_email']);
 	set_option('simple_contact_form_forward_to_email', $_POST['forward_to_email']);	
 	set_option('simple_contact_form_admin_notification_email_subject', $_POST['admin_notification_email_subject']);
@@ -130,16 +120,4 @@ function simple_contact_form_public_navigation_main($nav)
 	}
 
     return $nav;
-}
-
-// Helpers
-
-function simple_contact_form_clean_path($seed)
-{
-	$seed = trim($seed);
-    $seed = strtolower($seed);
-    // Replace spaces with dashes.
-    $seed = str_replace(' ', '-', $seed);
-    // Remove all but alphanumeric characters, underscores, and dashes.
-    return preg_replace('/[^\w\/-]/i', '', $seed);
 }
