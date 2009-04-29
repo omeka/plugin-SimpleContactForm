@@ -7,7 +7,7 @@
  */
 
 // Define Constants.
-define('SIMPLE_CONTACT_FORM_PLUGIN_VERSION', '0.2');
+define('SIMPLE_CONTACT_FORM_PLUGIN_VERSION', get_plugin_ini('SimpleContactForm', 'version'));
 define('SIMPLE_CONTACT_FORM_PAGE_PATH', 'contact/');
 define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE', 'Contact Us');
 define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS', 'Please send us your comments and suggestions.');
