@@ -7,7 +7,6 @@
  */
 
 // Define Constants.
-define('SIMPLE_CONTACT_FORM_PLUGIN_VERSION', get_plugin_ini('SimpleContactForm', 'version'));
 define('SIMPLE_CONTACT_FORM_PAGE_PATH', 'contact/');
 define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE', 'Contact Us');
 define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS', 'Please send us your comments and suggestions.');
@@ -32,7 +31,6 @@ add_filter('public_navigation_main', 'simple_contact_form_public_navigation_main
 
 function simple_contact_form_install()
 {
-	set_option('simple_contact_form_version', SIMPLE_CONTACT_FORM_VERSION);	
 	set_option('simple_contact_form_reply_from_email', get_option('administrator_email'));
 	set_option('simple_contact_form_forward_to_email', get_option('administrator_email'));	
 	set_option('simple_contact_form_admin_notification_email_subject', SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_SUBJECT);
@@ -49,7 +47,6 @@ function simple_contact_form_install()
 
 function simple_contact_form_uninstall()
 {
-	delete_option('simple_contact_form_version');	
 	delete_option('simple_contact_form_reply_from_email');
 	delete_option('simple_contact_form_forward_to_email');	
 	delete_option('simple_contact_form_admin_notification_email_subject');
