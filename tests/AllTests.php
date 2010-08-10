@@ -6,7 +6,7 @@
  * @package Omeka
  */
 
-require_once 'SimpleContactForm_TestCase.php';
+require_once 'SimpleContactForm_IntegrationHelper.php';
 
 /**
  * Test suite for SimpleContactForm.
@@ -20,7 +20,7 @@ class SimpleContactForm_AllTests extends PHPUnit_Framework_TestSuite
     {
         $suite = new SimpleContactForm_AllTests('SimpleContactForm Tests');
         $testCollector = new PHPUnit_Runner_IncludePathTestCollector(
-          array(dirname(__FILE__) . '/integration')
+          array(dirname(__FILE__) . '/cases')
         );
         $suite->addTestFiles($testCollector->collectTests());
         return $suite;

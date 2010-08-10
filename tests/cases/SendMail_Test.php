@@ -1,6 +1,6 @@
 <?php
 
-class SendMail_Test extends SimpleContactForm_TestCase {
+class SendMail_Test extends Omeka_Test_AppTestCase {
     
     protected $mailHelper;
     protected $mailTo;
@@ -11,6 +11,9 @@ class SendMail_Test extends SimpleContactForm_TestCase {
     public function setUp()
     {
         parent::setUp();
+
+        $integrationHelper = new SimpleContactForm_IntegrationHelper;
+        $integrationHelper->setUpPlugin();
 
         $this->mailHelper = Omeka_Test_Helper_Mail::factory();        
         $this->mailTo = Zend_Registry::get('test_config')->email->to;   
