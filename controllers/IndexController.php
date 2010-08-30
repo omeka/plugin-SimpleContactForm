@@ -3,6 +3,10 @@ class SimpleContactForm_IndexController extends Omeka_Controller_Action
 {    
 	public function indexAction()
 	{	
+	    $name = isset($_POST['name']) ? $_POST['name'] : '';
+		$email = isset($_POST['email']) ? $_POST['email'] : '';;
+		$message = isset($_POST['message']) ? $_POST['message'] : '';;
+
 	    $captchaObj = $this->_setupCaptcha();
 	    
 	    if ($this->getRequest()->isPost()) {    		
@@ -17,8 +21,9 @@ class SimpleContactForm_IndexController extends Omeka_Controller_Action
 	    // Pass this a blank Zend_View b/c ZF forces it.
 		if ($captchaObj) {
 		    $captcha = $captchaObj->render(new Zend_View);
+		} else {
+		    $captcha = '';
 		}
-		
 		
 		$this->view->assign(compact('name','email','message', 'captcha'));
 	}

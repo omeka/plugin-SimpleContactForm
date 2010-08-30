@@ -7,6 +7,7 @@ class SendMail_Test extends Omeka_Test_AppTestCase {
     protected $mailAdmin;
     protected $mailName;
     protected $mailMessage;
+    protected $_useAdminViews = false;
     
     public function setUp()
     {
