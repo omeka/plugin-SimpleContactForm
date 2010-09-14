@@ -55,8 +55,8 @@ class SimpleContactForm_IndexController extends Omeka_Controller_Action
 	
 	protected function _setupCaptcha()
 	{
-	    $publicKey = get_option('simple_contact_form_recaptcha_public_key');
-	    $privateKey = get_option('simple_contact_form_recaptcha_private_key');
+	    $publicKey = get_option('recaptcha_public_key');
+	    $privateKey = get_option('recaptcha_private_key');
 	    
 	    if (empty($publicKey) or empty($privateKey)) {
 	       return;
