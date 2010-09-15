@@ -27,13 +27,11 @@ $contact_page_instructions = get_option('simple_contact_form_contact_page_instru
 $thankyou_page_title = get_option('simple_contact_form_thankyou_page_title');
 $thankyou_page_message = get_option('simple_contact_form_thankyou_page_message');
 $add_to_main_navigation = get_option('simple_contact_form_add_to_main_navigation');
-$captcha_public_key = get_option('recaptcha_public_key');
-$captcha_private_key = get_option('recaptcha_private_key');
 
 $view = __v();
 ?>
 
-<?php if (empty($captcha_public_key) || empty($captcha_private_key)): ?>
+<?php if (!Omeka_Captcha::isConfigured()): ?>
     <p class="error">Please enter your <a href="http://recaptcha.net/">reCAPTCHA</a>
         API keys, or the contact form will be vulnerable to spam.</p>
 <?php endif; ?>

@@ -52,23 +52,11 @@ class SimpleContactForm_IndexController extends Omeka_Controller_Action
 	    
 	    return $valid;
 	}
-	
-	protected function _setupCaptcha()
-	{
-	    $publicKey = get_option('recaptcha_public_key');
-	    $privateKey = get_option('recaptcha_private_key');
-	    
-	    if (empty($publicKey) or empty($privateKey)) {
-	       return;
-	    }
-	    
-        // Originating request:
-        $captcha = new Zend_Captcha_ReCaptcha(array(
-            'pubKey'=>$publicKey, 
-            'privKey'=>$privateKey));
 
-        return $captcha;
-	}
+    protected function _setupCaptcha()
+    {
+        return Omeka_Captcha::getCaptcha();
+    }
 	
 	protected function sendEmailNotification($formEmail, $formName, $formMessage) {
 		
