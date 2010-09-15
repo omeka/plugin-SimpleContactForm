@@ -38,7 +38,7 @@
 		</div>		
 		
 		<div class="field">
-		  <?php echo $this->formSubmit('Send Message'); ?>
+		  <?php echo $this->formSubmit('send', 'Send Message'); ?>
 		</div>
 	    
 	    </fieldset>
