@@ -1,5 +1,5 @@
 <?php head(); ?>
-<h1><?php echo htmlspecialchars(get_option('simple_contact_form_contact_page_title')); ?></h1>
+<h1><?php echo settings('simple_contact_form_contact_page_title'); ?></h1>
 <div id="primary">
     
 <div id="simple-contact">
