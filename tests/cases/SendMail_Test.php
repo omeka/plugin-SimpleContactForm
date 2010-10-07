@@ -12,9 +12,17 @@ class SendMail_Test extends Omeka_Test_AppTestCase {
     public function setUp()
     {
         parent::setUp();
-
         $integrationHelper = new SimpleContactForm_IntegrationHelper;
         $integrationHelper->setUpPlugin();
+
+        // Override existing options to ensure that ReCaptcha 
+        // config does not interfere with tests (CAPTCHA should be disabled in 
+        // test environment, though not in development/production).
+        $bootstrap = $this->core->getBootstrap();
+        $options = $bootstrap->options;
+        unset($options[Omeka_Captcha::PUBLIC_KEY_OPTION]);
+        unset($options[Omeka_Captcha::PRIVATE_KEY_OPTION]);
+        $bootstrap->getContainer()->options = $options;
 
         $this->mailHelper = Omeka_Test_Helper_Mail::factory();        
         $this->mailTo = Zend_Registry::get('test_config')->email->to;   
