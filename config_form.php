@@ -1,18 +1,11 @@
-<?php echo js('tiny_mce/tiny_mce'); ?>
-<script type="text/javascript" charset="utf-8">
-    Event.observe(window, 'load', function(){
-        //WYSIWYG Editor
-       tinyMCE.init({
-        mode : "specific_textareas",
-       	editor_selector : "html-editor", 
-       	theme: "advanced",
-       	theme_advanced_toolbar_location : "top",
-       	theme_advanced_buttons1 : "bold,italic,underline,justifyleft,justifycenter,justifyright,bullist,numlist,link,formatselect",
-    	theme_advanced_buttons2 : "",
-    	theme_advanced_buttons3 : "",
-    	theme_advanced_toolbar_align : "left"
-       });
+<?php echo js('tiny_mce/tiny_mce_src'); ?>
+<script type="text/javascript">
+jQuery(window).load(function () {
+    Omeka.wysiwyg({
+        mode: 'specific_textareas',
+        editor_selector: 'html-editor'
     });
+});
 </script>
 
 <?php
