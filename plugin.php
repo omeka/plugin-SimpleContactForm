@@ -104,8 +104,6 @@ function simple_contact_form_config()
 	set_option('simple_contact_form_thankyou_page_title', $_POST['thankyou_page_title']);
 	set_option('simple_contact_form_thankyou_page_message', $_POST['thankyou_page_message']);
 	set_option('simple_contact_form_add_to_main_navigation', $_POST['add_to_main_navigation']);
-	set_option('simple_contact_form_recaptcha_public_key', $_POST['recaptcha_public_key']);
-	set_option('simple_contact_form_recaptcha_private_key', $_POST['recaptcha_private_key']);
 }
 
 function simple_contact_form_public_navigation_main($nav)
