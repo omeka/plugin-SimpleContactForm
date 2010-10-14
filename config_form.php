@@ -1,4 +1,4 @@
-<?php echo js('tiny_mce/tiny_mce_src'); ?>
+<?php echo js('tiny_mce/tiny_mce'); ?>
 <script type="text/javascript">
 jQuery(window).load(function () {
     Omeka.wysiwyg({
