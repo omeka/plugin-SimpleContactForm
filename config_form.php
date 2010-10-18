@@ -117,7 +117,7 @@ $view = __v();
 </div>
 
 <div class="field">
-    <?php echo $view->formLabel('add_to_main_navigation', 'Add to Main Naviagation'); ?>
+    <?php echo $view->formLabel('add_to_main_navigation', 'Add to Main Navigation'); ?>
     <div class="inputs">
         <?php echo $view->formCheckbox('add_to_main_navigation', $add_to_main_navigation, null, array('1', '0')); ?>
         <p class="explanation">
