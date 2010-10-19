@@ -25,8 +25,8 @@ $view = __v();
 ?>
 
 <?php if (!Omeka_Captcha::isConfigured()): ?>
-    <p class="error">Please enter your <a href="http://recaptcha.net/">reCAPTCHA</a>
-        API keys, or the contact form will be vulnerable to spam.</p>
+    <p class="alert">You have not entered your <a href="http://recaptcha.net/">reCAPTCHA</a>
+        API keys under <a href="<?php echo uri('security#recaptcha_public_key'); ?>">security settings</a>. We recommend adding these keys, or the contact form will be vulnerable to spam.</p>
 <?php endif; ?>
 
 <div class="field">
