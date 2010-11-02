@@ -3,7 +3,7 @@
  * @version $Id$
  * @copyright Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * @package SimpleContactForm
  */
 
 require_once 'SimpleContactForm_IntegrationHelper.php';
@@ -11,7 +11,7 @@ require_once 'SimpleContactForm_IntegrationHelper.php';
 /**
  * Test suite for SimpleContactForm.
  *
- * @package Omeka
+ * @package SimpleContactForm
  * @copyright Center for History and New Media, 2007-2010
  */
 class SimpleContactForm_AllTests extends PHPUnit_Framework_TestSuite
