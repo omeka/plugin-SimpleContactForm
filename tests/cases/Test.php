@@ -53,7 +53,7 @@ class SimpleContactForm_Test extends Omeka_Test_AppTestCase {
     }
     
     public function testSendMailToContacter() {
-        $mailText = $this->mailHelper->getMailText();
+        $mailText = $this->mailHelper->getMailText(1);
         $this->assertThat($mailText, $this->stringContains("From: ".get_option('administrator_email')));
         $this->assertThat($mailText, $this->stringContains("To: ".$this->mailName." <".$this->mailTo.">"));
         $this->assertThat($mailText, $this->stringContains("Subject: ".get_option('site_title')." - ".get_option('simple_contact_form_user_notification_email_subject')));
@@ -61,7 +61,7 @@ class SimpleContactForm_Test extends Omeka_Test_AppTestCase {
     }
     
     public function testSendMailToAdministrator() {
-        $mailText = $this->mailHelper->getMailText(1);          
+        $mailText = $this->mailHelper->getMailText();          
         $this->assertThat($mailText, $this->stringContains("From: ".$this->mailName." <".$this->mailTo.">"));
         $this->assertThat($mailText, $this->stringContains("To: ".get_option('administrator_email')));
         $this->assertThat($mailText, $this->stringContains("Subject: ".get_option('site_title')." - ".get_option('simple_contact_form_admin_notification_email_subject')));
