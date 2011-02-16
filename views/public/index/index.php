@@ -1,6 +1,6 @@
 <?php head(); ?>
-<h1><?php echo settings('simple_contact_form_contact_page_title'); ?></h1>
 <div id="primary">
+<h1><?php echo settings('simple_contact_form_contact_page_title'); ?></h1>
     
 <div id="simple-contact">
 	<div id="form-instructions">
