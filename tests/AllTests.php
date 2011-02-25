@@ -1,7 +1,7 @@
 <?php
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Center for History and New Media, 2007-2011
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package SimpleContactForm
  */
@@ -12,7 +12,7 @@ require_once 'SimpleContactForm_IntegrationHelper.php';
  * Test suite for SimpleContactForm.
  *
  * @package SimpleContactForm
- * @copyright Center for History and New Media, 2007-2010
+ * @copyright Center for History and New Media, 2007-2011
  */
 class SimpleContactForm_AllTests extends PHPUnit_Framework_TestSuite
 {
