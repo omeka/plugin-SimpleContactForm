@@ -19,7 +19,7 @@ class SimpleContactForm_Test extends Omeka_Test_AppTestCase {
     protected $mailAdmin;
     protected $mailName;
     protected $mailMessage;
-    protected $_useAdminViews = false;
+    protected $_isAdminTest = false;
     
     public function setUp()
     {
