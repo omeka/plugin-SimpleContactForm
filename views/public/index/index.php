@@ -26,7 +26,7 @@
 		<div class="field">
 		  <?php 
 		    echo $this->formLabel('message', 'Your Message: ');
-		    echo $this->formTextarea('message', $message, array('class'=>'textinput')); ?>
+		    echo $this->formTextarea('message', $message, array('class'=>'textinput', 'rows' => '10')); ?>
 		</div>    
 		
 		</fieldset>
