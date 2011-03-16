@@ -30,13 +30,14 @@
 		</div>    
 		
 		</fieldset>
-		
-		<fieldset>
-		    
-		<div class="field">
-		  <?php echo $captcha; ?>
-		</div>		
-		
+
+        <fieldset>
+        <?php if ($captcha): ?>
+        <div class="field">
+            <?php echo $captcha; ?>
+        </div>
+        <?php endif; ?>
+
 		<div class="field">
 		  <?php echo $this->formSubmit('send', 'Send Message'); ?>
 		</div>
@@ -46,4 +47,4 @@
 </div>
 
 </div>
-<?php foot(); ?>
+<?php foot();
