@@ -1,6 +1,6 @@
-<?php head(); ?>
+<?php echo head(); ?>
 <div id="primary">
-<h1><?php echo html_escape(settings('simple_contact_form_contact_page_title')); ?></h1>
+    <h1><?php echo html_escape(get_option('simple_contact_form_contact_page_title')); ?></h1>
     
 <div id="simple-contact">
 	<div id="form-instructions">
@@ -47,4 +47,4 @@
 </div>
 
 </div>
-<?php foot();
+<?php echo foot();

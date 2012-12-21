@@ -62,8 +62,9 @@ function simple_contact_form_uninstall()
 /**
  * Adds 2 routes for the form and the thank you page.
  **/
-function simple_contact_form_define_routes($router)
+function simple_contact_form_define_routes($args)
 {   
+        $router = $args['router'];
 	$router->addRoute(
 	    'simple_contact_form_form', 
 	    new Zend_Controller_Router_Route(
@@ -91,19 +92,20 @@ function simple_contact_form_config_form()
 	include 'config_form.php';
 }
 
-function simple_contact_form_config()
+function simple_contact_form_config($args)
 {
-	set_option('simple_contact_form_reply_from_email', $_POST['reply_from_email']);
-	set_option('simple_contact_form_forward_to_email', $_POST['forward_to_email']);	
-	set_option('simple_contact_form_admin_notification_email_subject', $_POST['admin_notification_email_subject']);
-	set_option('simple_contact_form_admin_notification_email_message_header', $_POST['admin_notification_email_message_header']);
-	set_option('simple_contact_form_user_notification_email_subject', $_POST['user_notification_email_subject']);
-	set_option('simple_contact_form_user_notification_email_message_header', $_POST['user_notification_email_message_header']);
-	set_option('simple_contact_form_contact_page_title', $_POST['contact_page_title']);
-	set_option('simple_contact_form_contact_page_instructions',$_POST['contact_page_instructions']);
-	set_option('simple_contact_form_thankyou_page_title', $_POST['thankyou_page_title']);
-	set_option('simple_contact_form_thankyou_page_message', $_POST['thankyou_page_message']);
-	set_option('simple_contact_form_add_to_main_navigation', $_POST['add_to_main_navigation']);
+        $post = $args['post'];
+	set_option('simple_contact_form_reply_from_email', $post['reply_from_email']);
+	set_option('simple_contact_form_forward_to_email', $post['forward_to_email']);	
+	set_option('simple_contact_form_admin_notification_email_subject', $post['admin_notification_email_subject']);
+	set_option('simple_contact_form_admin_notification_email_message_header', $post['admin_notification_email_message_header']);
+	set_option('simple_contact_form_user_notification_email_subject', $post['user_notification_email_subject']);
+	set_option('simple_contact_form_user_notification_email_message_header', $post['user_notification_email_message_header']);
+	set_option('simple_contact_form_contact_page_title', $post['contact_page_title']);
+	set_option('simple_contact_form_contact_page_instructions',$post['contact_page_instructions']);
+	set_option('simple_contact_form_thankyou_page_title', $post['thankyou_page_title']);
+	set_option('simple_contact_form_thankyou_page_message', $post['thankyou_page_message']);
+	set_option('simple_contact_form_add_to_main_navigation', $post['add_to_main_navigation']);
 }
 
 function simple_contact_form_public_navigation_main($nav)
@@ -111,7 +113,12 @@ function simple_contact_form_public_navigation_main($nav)
 	$contact_title = get_option('simple_contact_form_contact_page_title');
 	$contact_add_to_navigation = get_option('simple_contact_form_add_to_main_navigation');
 	if ($contact_add_to_navigation) {
-	    $nav[$contact_title] = uri(array(), 'simple_contact_form_form');
+	    //$nav[$contact_title] = uri(array(), 'simple_contact_form_form');
+            $nav[] = array(
+                'label'   => $contact_title,
+                'uri'     => url(array(),'simple_contact_form_form'),
+                'visible' => true
+            );
 	}
 
     return $nav;

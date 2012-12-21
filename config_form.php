@@ -1,4 +1,4 @@
-<?php echo js('tiny_mce/tiny_mce'); ?>
+<?php echo js_tag('vendor/tiny_mce/tiny_mce'); ?>
 <script type="text/javascript">
 jQuery(window).load(function () {
     Omeka.wysiwyg({
@@ -9,24 +9,24 @@ jQuery(window).load(function () {
 </script>
 
 <?php
-$reply_from_email = get_option('simple_contact_form_reply_from_email');
-$forward_to_email = get_option('simple_contact_form_forward_to_email');	
-$admin_notification_email_subject = get_option('simple_contact_form_admin_notification_email_subject');
+$reply_from_email                        = get_option('simple_contact_form_reply_from_email');
+$forward_to_email                        = get_option('simple_contact_form_forward_to_email');	
+$admin_notification_email_subject        = get_option('simple_contact_form_admin_notification_email_subject');
 $admin_notification_email_message_header = get_option('simple_contact_form_admin_notification_email_message_header');
-$user_notification_email_subject = get_option('simple_contact_form_user_notification_email_subject');
-$user_notification_email_message_header = get_option('simple_contact_form_user_notification_email_message_header');
-$contact_page_title = get_option('simple_contact_form_contact_page_title');
-$contact_page_instructions = get_option('simple_contact_form_contact_page_instructions');
-$thankyou_page_title = get_option('simple_contact_form_thankyou_page_title');
-$thankyou_page_message = get_option('simple_contact_form_thankyou_page_message');
-$add_to_main_navigation = get_option('simple_contact_form_add_to_main_navigation');
+$user_notification_email_subject         = get_option('simple_contact_form_user_notification_email_subject');
+$user_notification_email_message_header  = get_option('simple_contact_form_user_notification_email_message_header');
+$contact_page_title                      = get_option('simple_contact_form_contact_page_title');
+$contact_page_instructions               = get_option('simple_contact_form_contact_page_instructions');
+$thankyou_page_title                     = get_option('simple_contact_form_thankyou_page_title');
+$thankyou_page_message                   = get_option('simple_contact_form_thankyou_page_message');
+$add_to_main_navigation                  = get_option('simple_contact_form_add_to_main_navigation');
 
-$view = __v();
+$view = get_view();
 ?>
 
 <?php if (!Omeka_Captcha::isConfigured()): ?>
     <p class="alert">You have not entered your <a href="http://recaptcha.net/">reCAPTCHA</a>
-        API keys under <a href="<?php echo uri('security#recaptcha_public_key'); ?>">security settings</a>. We recommend adding these keys, or the contact form will be vulnerable to spam.</p>
+        API keys under <a href="<?php echo url('security#recaptcha_public_key'); ?>">security settings</a>. We recommend adding these keys, or the contact form will be vulnerable to spam.</p>
 <?php endif; ?>
 
 <div class="field">
