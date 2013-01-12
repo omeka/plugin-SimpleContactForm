@@ -1,4 +1,15 @@
 <?php
+/**
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2012
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package SimpleContactForm
+ */
+
+/**
+ * Controller for Contact form.
+ *
+ * @package SimpleContactForm
+ */
 class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionController
 {    
 	public function indexAction()
@@ -13,7 +24,9 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
     		// If the form submission is valid, then send out the email
     		if ($this->_validateFormSubmission($captchaObj)) {
 				$this->sendEmailNotification($_POST['email'], $_POST['name'], $_POST['message']);
-	            $this->_helper->redirector(array(), 'simple_contact_form_thankyou');
+	          // $this->_helper->redirector(array(), 'simple_contact_form_thankyou');
+                  $this->_helper->redirector('thankyou');
+                 
     		}
 	    }	
 	    

@@ -64,19 +64,23 @@ function simple_contact_form_uninstall()
  **/
 function simple_contact_form_define_routes($args)
 {   
+    
+    if(is_admin_theme()) return;
+    
         $router = $args['router'];
-	$router->addRoute(
+        	$router->addRoute(
 	    'simple_contact_form_form', 
 	    new Zend_Controller_Router_Route(
 	        SIMPLE_CONTACT_FORM_PAGE_PATH, 
-	        array('module'       => 'simple-contact-form')
+	        array(
+                    'module'       => 'simple-contact-form',
+                     )
 	    )
 	);
-		
-	$router->addRoute(
+        	$router->addRoute(
 	    'simple_contact_form_thankyou', 
 	    new Zend_Controller_Router_Route(
-	        SIMPLE_CONTACT_FORM_PAGE_PATH . 'thankyou', 
+	       SIMPLE_CONTACT_FORM_PAGE_PATH . 'thankyou', 
 	        array(
 	            'module'       => 'simple-contact-form', 
 	            'controller'   => 'index', 
@@ -84,7 +88,11 @@ function simple_contact_form_define_routes($args)
 	        )
 	    )
 	);
+        
 
+		
+
+        
 }
 
 function simple_contact_form_config_form() 
