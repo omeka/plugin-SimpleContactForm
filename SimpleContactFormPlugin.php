@@ -1,11 +1,18 @@
 <?php
+
 /**
  * @version $Id$
- * @copyright Center for History and New Media, 2008
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @copyright Center for History and New Media, 2010
  * @package SimpleContactForm
  */
 
+/**
+ * SimpleContactForm plugin class
+ *
+ * @copyright Center for History and New Media, 2010
+ * @package SimpleContactForm
+ */
 // Define Constants.
 define('SIMPLE_CONTACT_FORM_PAGE_PATH', 'contact/');
 define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE', 'Contact Us');
@@ -18,18 +25,24 @@ define('SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_SUBJECT', 'Thank You');
 define('SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_MESSAGE_HEADER', 'Thank you for sending us the following message:');
 define('SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION', 1);
 
-// Add plugin hooks.
-add_plugin_hook('install', 'simple_contact_form_install');
-add_plugin_hook('uninstall', 'simple_contact_form_uninstall');
-add_plugin_hook('define_routes', 'simple_contact_form_define_routes');
-add_plugin_hook('config_form', 'simple_contact_form_config_form');
-add_plugin_hook('config', 'simple_contact_form_config');
 
-// Add filters.
-add_filter('public_navigation_main', 'simple_contact_form_public_navigation_main');
-
-
-function simple_contact_form_install()
+class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
+{
+    // Define Hooks
+    protected $_hooks = array(
+        'install',
+        'uninstall',
+        'define_routes',
+        'config_form',
+        'config'
+    );
+    
+    //Add filters
+    protected $_filters = array(
+        'public_navigation_main'
+    );
+    
+   public function hookInstall()
 {
 	set_option('simple_contact_form_reply_from_email', get_option('administrator_email'));
 	set_option('simple_contact_form_forward_to_email', get_option('administrator_email'));	
@@ -45,7 +58,7 @@ function simple_contact_form_install()
 	
 }
 
-function simple_contact_form_uninstall()
+public function hookUninstall()
 {
 	delete_option('simple_contact_form_reply_from_email');
 	delete_option('simple_contact_form_forward_to_email');	
@@ -62,26 +75,23 @@ function simple_contact_form_uninstall()
 /**
  * Adds 2 routes for the form and the thank you page.
  **/
-function simple_contact_form_define_routes($args)
+function hookDefineRoutes($args)
 {   
-    
-    if(is_admin_theme()) return;
-    
+  
+ 
         $router = $args['router'];
-        
-        	$router->addRoute(
+	$router->addRoute(
 	    'simple_contact_form_form', 
 	    new Zend_Controller_Router_Route(
 	        SIMPLE_CONTACT_FORM_PAGE_PATH, 
-	        array(
-                    'module'       => 'simple-contact-form',
-                     )
+	        array('module'       => 'simple-contact-form')
 	    )
 	);
-        	$router->addRoute(
+
+	$router->addRoute(
 	    'simple_contact_form_thankyou', 
 	    new Zend_Controller_Router_Route(
-	       SIMPLE_CONTACT_FORM_PAGE_PATH . ':thankyou', 
+	        SIMPLE_CONTACT_FORM_PAGE_PATH.'thankyou', 
 	        array(
 	            'module'       => 'simple-contact-form', 
 	            'controller'   => 'index', 
@@ -89,19 +99,17 @@ function simple_contact_form_define_routes($args)
 	        )
 	    )
 	);
-        
-   
-		
 
-        
 }
 
-function simple_contact_form_config_form() 
+
+
+public function hookConfigForm() 
 {
 	include 'config_form.php';
 }
 
-function simple_contact_form_config($args)
+public function hookConfig($args)
 {
         $post = $args['post'];
 	set_option('simple_contact_form_reply_from_email', $post['reply_from_email']);
@@ -117,7 +125,7 @@ function simple_contact_form_config($args)
 	set_option('simple_contact_form_add_to_main_navigation', $post['add_to_main_navigation']);
 }
 
-function simple_contact_form_public_navigation_main($nav)
+public function filterPublicNavigationMain($nav)
 {
 	$contact_title = get_option('simple_contact_form_contact_page_title');
 	$contact_add_to_navigation = get_option('simple_contact_form_add_to_main_navigation');
@@ -131,4 +139,5 @@ function simple_contact_form_public_navigation_main($nav)
 	}
 
     return $nav;
+}
 }
