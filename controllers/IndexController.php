@@ -23,9 +23,9 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
 	    if ($this->getRequest()->isPost()) {    		
     		// If the form submission is valid, then send out the email
     		if ($this->_validateFormSubmission($captchaObj)) {
-				$this->sendEmailNotification($_POST['email'], $_POST['name'], $_POST['message']);
-	          // $this->_helper->redirector(array(), 'simple_contact_form_thankyou');
-                  $this->_helper->redirector('thankyou');
+		    $this->sendEmailNotification($_POST['email'], $_POST['name'], $_POST['message']);
+	            $url = WEB_ROOT."/".SIMPLE_CONTACT_FORM_PAGE_PATH."thankyou";
+                    $this->_helper->redirector->goToUrl($url);
                  
     		}
 	    }	

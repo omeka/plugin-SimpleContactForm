@@ -19,7 +19,7 @@
 		
         <div class="field">
             <?php 
-            echo $this->formLabel('email', 'Your Email: ');
+                    echo $this->formLabel('email', 'Your Email: ');
 		    echo $this->formText('email', $email, array('class'=>'textinput'));  ?>
         </div>
         
