@@ -34,7 +34,8 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         'uninstall',
         'define_routes',
         'config_form',
-        'config'
+        'config',
+        'initialize'
     );
     
     //Add filters
@@ -125,6 +126,15 @@ public function hookConfig($args)
 	set_option('simple_contact_form_add_to_main_navigation', $post['add_to_main_navigation']);
 }
 
+/**
+* Initialize this plugin.
+*/
+public function hookInitialize()
+{
+    // Add translation.
+    add_translation_source(dirname(__FILE__) . '/languages');
+}
+
 public function filterPublicNavigationMain($nav)
 {
 	$contact_title = get_option('simple_contact_form_contact_page_title');
@@ -140,4 +150,6 @@ public function filterPublicNavigationMain($nav)
 
     return $nav;
 }
+
+
 }

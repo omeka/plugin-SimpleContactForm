@@ -13,19 +13,19 @@
             
         <div class="field">
 		<?php 
-		    echo $this->formLabel('name', 'Your Name: ');
+		    echo $this->formLabel('name', __('Your Name:') . ' ') ;
 		    echo $this->formText('name', $name, array('class'=>'textinput')); ?>
 		</div>
 		
         <div class="field">
             <?php 
-                    echo $this->formLabel('email', 'Your Email: ');
+                    echo $this->formLabel('email', __('Your Email:') . ' ');
 		    echo $this->formText('email', $email, array('class'=>'textinput'));  ?>
         </div>
         
 		<div class="field">
 		  <?php 
-		    echo $this->formLabel('message', 'Your Message: ');
+		    echo $this->formLabel('message', __('Your Message:') . ' ');
 		    echo $this->formTextarea('message', $message, array('class'=>'textinput', 'rows' => '10')); ?>
 		</div>    
 		
@@ -39,7 +39,7 @@
         <?php endif; ?>
 
 		<div class="field">
-		  <?php echo $this->formSubmit('send', 'Send Message'); ?>
+		  <?php echo $this->formSubmit('send', __('Send Message')); ?>
 		</div>
 	    
 	    </fieldset>
