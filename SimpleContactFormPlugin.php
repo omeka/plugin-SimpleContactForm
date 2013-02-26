@@ -34,7 +34,8 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         'uninstall',
         'define_routes',
         'config_form',
-        'config'
+        'config',
+        'initialize'
     );
 
     //Add filters
@@ -106,31 +107,43 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
     public function hookConfig($args)
     {
         $post = $args['post'];
-        set_option('simple_contact_form_reply_from_email', $post['reply_from_email']);
-        set_option('simple_contact_form_forward_to_email', $post['forward_to_email']);    
-        set_option('simple_contact_form_admin_notification_email_subject', $post['admin_notification_email_subject']);
-        set_option('simple_contact_form_admin_notification_email_message_header', $post['admin_notification_email_message_header']);
-        set_option('simple_contact_form_user_notification_email_subject', $post['user_notification_email_subject']);
-        set_option('simple_contact_form_user_notification_email_message_header', $post['user_notification_email_message_header']);
-        set_option('simple_contact_form_contact_page_title', $post['contact_page_title']);
-        set_option('simple_contact_form_contact_page_instructions',$post['contact_page_instructions']);
-        set_option('simple_contact_form_thankyou_page_title', $post['thankyou_page_title']);
-        set_option('simple_contact_form_thankyou_page_message', $post['thankyou_page_message']);
-        set_option('simple_contact_form_add_to_main_navigation', $post['add_to_main_navigation']);
-    }
+	set_option('simple_contact_form_reply_from_email', $post['reply_from_email']);
+	set_option('simple_contact_form_forward_to_email', $post['forward_to_email']);	
+	set_option('simple_contact_form_admin_notification_email_subject', $post['admin_notification_email_subject']);
+	set_option('simple_contact_form_admin_notification_email_message_header', $post['admin_notification_email_message_header']);
+	set_option('simple_contact_form_user_notification_email_subject', $post['user_notification_email_subject']);
+	set_option('simple_contact_form_user_notification_email_message_header', $post['user_notification_email_message_header']);
+	set_option('simple_contact_form_contact_page_title', $post['contact_page_title']);
+	set_option('simple_contact_form_contact_page_instructions',$post['contact_page_instructions']);
+	set_option('simple_contact_form_thankyou_page_title', $post['thankyou_page_title']);
+	set_option('simple_contact_form_thankyou_page_message', $post['thankyou_page_message']);
+	set_option('simple_contact_form_add_to_main_navigation', $post['add_to_main_navigation']);
+}
 
-    public function filterPublicNavigationMain($nav)
-    {
-        $contact_title = get_option('simple_contact_form_contact_page_title');
-        $contact_add_to_navigation = get_option('simple_contact_form_add_to_main_navigation');
-        if ($contact_add_to_navigation) {
-            //$nav[$contact_title] = uri(array(), 'simple_contact_form_form');
-                $nav[] = array(
-                    'label'   => $contact_title,
-                    'uri'     => url(array(),'simple_contact_form_form'),
-                    'visible' => true
-                );
-        }
-        return $nav;
-    }
+/**
+* Initialize this plugin.
+*/
+public function hookInitialize()
+{
+    // Add translation.
+    add_translation_source(dirname(__FILE__) . '/languages');
+}
+
+public function filterPublicNavigationMain($nav)
+{
+	$contact_title = get_option('simple_contact_form_contact_page_title');
+	$contact_add_to_navigation = get_option('simple_contact_form_add_to_main_navigation');
+	if ($contact_add_to_navigation) {
+	    //$nav[$contact_title] = uri(array(), 'simple_contact_form_form');
+            $nav[] = array(
+                'label'   => $contact_title,
+                'uri'     => url(array(),'simple_contact_form_form'),
+                'visible' => true
+            );
+	}
+
+    return $nav;
+}
+
+
 }
