@@ -15,7 +15,6 @@
  */
 // Define Constants.
 define('SIMPLE_CONTACT_FORM_PAGE_PATH', 'contact/');
-define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE', 'Contact Us');
 define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS', 'Please send us your comments and suggestions.');
 define('SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE', 'Thank You For Your Feedback');
 define('SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE', 'We appreciate your comments and suggestions.');
@@ -28,6 +27,9 @@ define('SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION', 1);
 
 class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
 {
+
+    private $SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE = 'Contact Us';
+
     // Define Hooks
     protected $_hooks = array(
         'install',
@@ -43,25 +45,25 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         'public_navigation_main'
     );
 
-   public function hookInstall()
+    public function hookInstall()
     {
         set_option('simple_contact_form_reply_from_email', get_option('administrator_email'));
-        set_option('simple_contact_form_forward_to_email', get_option('administrator_email'));    
-        set_option('simple_contact_form_admin_notification_email_subject', SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_SUBJECT);
-        set_option('simple_contact_form_admin_notification_email_message_header', SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_MESSAGE_HEADER);
-        set_option('simple_contact_form_user_notification_email_subject', SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_SUBJECT);
-        set_option('simple_contact_form_user_notification_email_message_header', SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_MESSAGE_HEADER);
-        set_option('simple_contact_form_contact_page_title', SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE);
-        set_option('simple_contact_form_contact_page_instructions', SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS);
-        set_option('simple_contact_form_thankyou_page_title', SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE);
-        set_option('simple_contact_form_thankyou_page_message', SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE);    
-        set_option('simple_contact_form_add_to_main_navigation', SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION);    
+        set_option('simple_contact_form_forward_to_email', get_option('administrator_email'));
+        set_option('simple_contact_form_admin_notification_email_subject', __(SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_SUBJECT));
+        set_option('simple_contact_form_admin_notification_email_message_header', __(SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_MESSAGE_HEADER));
+        set_option('simple_contact_form_user_notification_email_subject', __(SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_SUBJECT));
+        set_option('simple_contact_form_user_notification_email_message_header', __(SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_MESSAGE_HEADER));
+        set_option('simple_contact_form_contact_page_title', __($this->SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE));
+        set_option('simple_contact_form_contact_page_instructions', __(SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS));
+        set_option('simple_contact_form_thankyou_page_title', __(SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE));
+        set_option('simple_contact_form_thankyou_page_message', __(SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE));
+        set_option('simple_contact_form_add_to_main_navigation', __(SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION));
     }
 
     public function hookUninstall()
     {
         delete_option('simple_contact_form_reply_from_email');
-        delete_option('simple_contact_form_forward_to_email');    
+        delete_option('simple_contact_form_forward_to_email');
         delete_option('simple_contact_form_admin_notification_email_subject');
         delete_option('simple_contact_form_admin_notification_email_message_header');
         delete_option('simple_contact_form_user_notification_email_subject');
@@ -69,7 +71,7 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         delete_option('simple_contact_form_contact_page_title');
         delete_option('simple_contact_form_contact_page_instructions');
         delete_option('simple_contact_form_thankyou_page_title');
-        delete_option('simple_contact_form_add_to_main_navigation');    
+        delete_option('simple_contact_form_add_to_main_navigation');
     }
 
     /**
@@ -79,27 +81,27 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $router = $args['router'];
         $router->addRoute(
-            'simple_contact_form_form', 
+            'simple_contact_form_form',
             new Zend_Controller_Router_Route(
-                SIMPLE_CONTACT_FORM_PAGE_PATH, 
+                SIMPLE_CONTACT_FORM_PAGE_PATH,
                 array('module'       => 'simple-contact-form')
             )
         );
 
         $router->addRoute(
-            'simple_contact_form_thankyou', 
+            'simple_contact_form_thankyou',
             new Zend_Controller_Router_Route(
-                SIMPLE_CONTACT_FORM_PAGE_PATH.'thankyou', 
+                SIMPLE_CONTACT_FORM_PAGE_PATH.'thankyou',
                 array(
-                    'module'       => 'simple-contact-form', 
-                    'controller'   => 'index', 
-                    'action'       => 'thankyou', 
+                    'module'       => 'simple-contact-form',
+                    'controller'   => 'index',
+                    'action'       => 'thankyou',
                 )
             )
         );
     }
 
-    public function hookConfigForm() 
+    public function hookConfigForm()
     {
         include 'config_form.php';
     }
@@ -108,7 +110,7 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $post = $args['post'];
 	set_option('simple_contact_form_reply_from_email', $post['reply_from_email']);
-	set_option('simple_contact_form_forward_to_email', $post['forward_to_email']);	
+	set_option('simple_contact_form_forward_to_email', $post['forward_to_email']);
 	set_option('simple_contact_form_admin_notification_email_subject', $post['admin_notification_email_subject']);
 	set_option('simple_contact_form_admin_notification_email_message_header', $post['admin_notification_email_message_header']);
 	set_option('simple_contact_form_user_notification_email_subject', $post['user_notification_email_subject']);
