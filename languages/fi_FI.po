@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/plugin-SimpleContactForm/issues\n"
 "POT-Creation-Date: 2013-02-24 12:49+0200\n"
-"PO-Revision-Date: 2013-03-19 13:28+0200\n"
+"PO-Revision-Date: 2013-03-19 13:37+0200\n"
 "Last-Translator: Matti Lassila <matti.lassila@gmail.com>\n"
 "Language-Team: Finnish (Finland) (http://www.transifex.com/projects/p/omeka/language/fi_FI/)\n"
 "MIME-Version: 1.0\n"
@@ -179,7 +179,7 @@ msgid "Your Email:"
 msgstr "Sähköpostiosoite:"
 
 #: views/public/index/index.php:28
-msgid "Your Message: "
+msgid "Your Message:"
 msgstr "Viesti:"
 
 #: views/public/index/index.php:42
