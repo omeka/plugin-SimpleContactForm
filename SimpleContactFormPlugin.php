@@ -28,9 +28,6 @@ define('SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION', 1);
 
 class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
 {
-
-    private $SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE = 'Contact Us';
-
     // Define Hooks
     protected $_hooks = array(
         'install',
@@ -54,7 +51,7 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         set_option('simple_contact_form_admin_notification_email_message_header', __(SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_MESSAGE_HEADER));
         set_option('simple_contact_form_user_notification_email_subject', __(SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_SUBJECT));
         set_option('simple_contact_form_user_notification_email_message_header', __(SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_MESSAGE_HEADER));
-        set_option('simple_contact_form_contact_page_title', __($this->SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE));
+        set_option('simple_contact_form_contact_page_title', __(SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE));
         set_option('simple_contact_form_contact_page_instructions', __(SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS));
         set_option('simple_contact_form_thankyou_page_title', __(SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE));
         set_option('simple_contact_form_thankyou_page_message', __(SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE));
