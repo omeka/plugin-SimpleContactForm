@@ -26,7 +26,7 @@ $view = get_view();
 
 <?php if (!Omeka_Captcha::isConfigured()): ?>
     <p class="alert"><?php echo __('You have not entered your'); ?> <a href="http://recaptcha.net/">reCAPTCHA</a>
-        <?php echo __('API keys under');?> <a href="<?php echo url('security#recaptcha_public_key'); ?>"><?php echo __('security settings');?></a>.<?php echo __('We recommend adding these keys, or the contact form will be vulnerable to spam.'); ?></p>
+        <?php echo __('API keys under');?> <a href="<?php echo url('security#recaptcha_public_key'); ?>"><?php echo __('security settings');?></a>. <?php echo __('We recommend adding these keys, or the contact form will be vulnerable to spam.'); ?></p>
 <?php endif; ?>
 
 <div class="field">
