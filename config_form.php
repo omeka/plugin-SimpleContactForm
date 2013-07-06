@@ -10,7 +10,7 @@ jQuery(window).load(function () {
 
 <?php
 $reply_from_email                        = get_option('simple_contact_form_reply_from_email');
-$forward_to_email                        = get_option('simple_contact_form_forward_to_email');	
+$forward_to_email                        = get_option('simple_contact_form_forward_to_email');
 $admin_notification_email_subject        = get_option('simple_contact_form_admin_notification_email_subject');
 $admin_notification_email_message_header = get_option('simple_contact_form_admin_notification_email_message_header');
 $user_notification_email_subject         = get_option('simple_contact_form_user_notification_email_subject');
@@ -25,8 +25,8 @@ $view = get_view();
 ?>
 
 <?php if (!Omeka_Captcha::isConfigured()): ?>
-    <p class="alert"><?php echo __('You have not entered your'); ?> <a href="http://recaptcha.net/">reCAPTCHA</a>
-        <?php echo __('API keys under');?> <a href="<?php echo url('security#recaptcha_public_key'); ?>"><?php echo __('security settings');?></a>. <?php echo __('We recommend adding these keys, or the contact form will be vulnerable to spam.'); ?></p>
+    <p class="alert"><?php echo __('You have not entered your <a href="http://recaptcha.net/">reCAPTCHA</a> API keys under <a href="%s">security settings</a>.', url('security#recaptcha_public_key')); ?>
+     <?php echo __('We recommend adding these keys, or the contact form will be vulnerable to spam.'); ?></p>
 <?php endif; ?>
 
 <div class="field">
