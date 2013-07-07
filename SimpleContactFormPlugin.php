@@ -25,11 +25,11 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
      * @var array Hooks for the plugin.
      */
     protected $_hooks = array(
+        'initialize',
         'install',
         'uninstall',
         'config_form',
         'config',
-        'initialize',
         'define_routes',
     );
 
@@ -56,6 +56,15 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         'simple_contact_form_thankyou_page_message' => SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE,
         'simple_contact_form_add_to_main_navigation' => SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION,
     );
+
+    /**
+     * Initialize this plugin.
+     */
+    public function hookInitialize()
+    {
+        // Add translation.
+        add_translation_source(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'languages');
+    }
 
     /**
      * Installs the plugin.
@@ -105,15 +114,6 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         set_option('simple_contact_form_thankyou_page_title', $post['thankyou_page_title']);
         set_option('simple_contact_form_thankyou_page_message', $post['thankyou_page_message']);
         set_option('simple_contact_form_add_to_main_navigation', $post['add_to_main_navigation']);
-    }
-
-    /**
-     * Initialize this plugin.
-     */
-    public function hookInitialize()
-    {
-        // Add translation.
-        add_translation_source(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'languages');
     }
 
     /**
