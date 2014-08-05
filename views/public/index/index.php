@@ -1,16 +1,14 @@
 <?php echo head(); ?>
 <div id="primary">
     <h1><?php echo html_escape(get_option('simple_contact_form_contact_page_title')); ?></h1>
-    
 <div id="simple-contact">
     <div id="form-instructions">
         <?php echo get_option('simple_contact_form_contact_page_instructions'); // HTML ?>
     </div>
     <?php echo flash(); ?>
     <form name="contact_form" id="contact-form"  method="post" enctype="multipart/form-data" accept-charset="utf-8">
-        
+
         <fieldset>
-            
         <div class="field">
         <?php echo $this->formLabel('name', 'Your Name: '); ?>
             <div class='inputs'>
@@ -34,6 +32,7 @@
         
         </fieldset>
 
+
         <fieldset>
         <?php if ($captcha): ?>
         <div class="field">
@@ -47,6 +46,7 @@
         
         </fieldset>
     </form>
+
 </div>
 
 </div>
