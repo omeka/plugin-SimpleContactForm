@@ -26,6 +26,7 @@
             <?php echo $options['captcha']; ?>
         </div>
         <?php endif; ?>
+        <?php echo $this->formHidden('path', $options['path']); ?>
         <div class="field">
             <?php echo $this->formSubmit('send', __('Send Message')); ?>
         </div>

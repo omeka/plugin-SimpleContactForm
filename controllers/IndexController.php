@@ -16,6 +16,7 @@ class SimpleContact_IndexController extends Omeka_Controller_AbstractActionContr
         $name = isset($_POST['name']) ? $_POST['name'] : '';
         $email = isset($_POST['email']) ? $_POST['email'] : '';
         $message = isset($_POST['message']) ? $_POST['message'] : '';
+        $path = isset($_POST['path']) ? $_POST['path'] : '';
 
         $captchaObj = $this->_setupCaptcha();
 
@@ -23,8 +24,8 @@ class SimpleContact_IndexController extends Omeka_Controller_AbstractActionContr
             // If the form submission is valid, then save message and, if
             // wanted, send out the email.
             if ($this->_validateFormSubmission($captchaObj)) {
-                $this->_sendEmailNotification($_POST['email'], $_POST['name'], $_POST['message']);
-                $url = WEB_ROOT . '/' . SIMPLE_CONTACT_PATH . '/thankyou';
+                $this->_sendEmailNotification($email, $name, $message);
+                $url = SIMPLE_CONTACT_PATH . '/thankyou';
                 $this->_helper->redirector->goToUrl($url);
             }
         }
@@ -37,7 +38,7 @@ class SimpleContact_IndexController extends Omeka_Controller_AbstractActionContr
             $captcha = '';
         }
 
-        $this->view->assign(compact('name', 'email', 'message', 'captcha'));
+        $this->view->assign(compact('name', 'email', 'message', 'path', 'captcha'));
     }
 
     /**
@@ -72,17 +73,17 @@ class SimpleContact_IndexController extends Omeka_Controller_AbstractActionContr
         return Omeka_Captcha::getCaptcha();
     }
 
-    protected function _sendEmailNotification($formEmail, $formName, $formMessage)
+    protected function _sendEmailNotification($email, $name, $message)
     {
         // Notify the admin.
         // Use the admin email specified in the plugin configuration.
         $forwardToEmail = get_option('simple_contact_notification_admin_to');
         if (!empty($forwardToEmail)) {
             $mail = new Zend_Mail('UTF-8');
-            $mail->setFrom($formEmail, $formName);
+            $mail->setFrom($email, $name);
             $mail->addTo($forwardToEmail);
             $mail->setSubject(get_option('site_title') . ' - ' . get_option('simple_contact_notification_admin_subject'));
-            $mail->setBodyText(get_option('simple_contact_notification_admin_header') . "\n\n" . $formMessage);
+            $mail->setBodyText(get_option('simple_contact_notification_admin_header') . "\n\n" . $message);
             $mail->send();
         }
 
@@ -91,9 +92,9 @@ class SimpleContact_IndexController extends Omeka_Controller_AbstractActionContr
         if (!empty($replyToEmail)) {
             $mail = new Zend_Mail('UTF-8');
             $mail->setFrom($replyToEmail);
-            $mail->addTo($formEmail, $formName);
+            $mail->addTo($email, $name);
             $mail->setSubject(get_option('site_title') . ' - ' . get_option('simple_contact_notification_user_subject'));
-            $mail->setBodyText(get_option('simple_contact_notification_user_header') . "\n\n" . $formMessage);
+            $mail->setBodyText(get_option('simple_contact_notification_user_header') . "\n\n" . $message);
             $mail->send();
         }
     }

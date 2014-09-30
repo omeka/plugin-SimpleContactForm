@@ -33,6 +33,7 @@ class SimpleContact_View_Helper_SimpleContactForm extends Zend_View_Helper_Abstr
             'email' => '',
             'message' => '',
             'captcha' => '',
+            'path' => Zend_Controller_Front::getInstance()->getRequest()->getPathInfo(),
             'form_attributes' => array(),
         );
 
@@ -56,7 +57,8 @@ class SimpleContact_View_Helper_SimpleContactForm extends Zend_View_Helper_Abstr
 
         return $this->view->partial(
             'index/simple-contact-form.php',
-            array('options' => $options)
-        );
+            array(
+                'options' => $options,
+        ));
     }
 }
