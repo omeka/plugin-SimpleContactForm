@@ -1,6 +1,6 @@
 <?php
 /**
- * SimpleContactForm
+ * SimpleContact
  *
  * @copyright Copyright 2008-2013 Roy Rosenzweig Center for History and New Media
  * @copyright Copyright Daniel Berthereau, 2013
@@ -10,9 +10,9 @@
 /**
  * Return the site-wide simple contact form.
  *
- * @package SimpleContactForm
+ * @package SimpleContact
  */
-class SimpleContactForm_View_Helper_SimpleContactForm extends Zend_View_Helper_Abstract
+class SimpleContact_View_Helper_SimpleContactForm extends Zend_View_Helper_Abstract
 {
     /**
      * Return the site-wide search form.
@@ -41,7 +41,7 @@ class SimpleContactForm_View_Helper_SimpleContactForm extends Zend_View_Helper_A
         // Set the default form attributes.
         $options['form_attributes']['method'] = 'post';
         if (!isset($options['form_attributes']['action'])) {
-            $url = url(SIMPLE_CONTACT_FORM_PAGE_PATH);
+            $url = url(SIMPLE_CONTACT_PATH);
             $options['form_attributes']['action'] = $url;
         }
         if (!isset($options['form_attributes']['id'])) {

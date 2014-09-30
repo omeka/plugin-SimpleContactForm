@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: SimpleContactForm\n"
+"Project-Id-Version: SimpleContact\n"
 "Report-Msgid-Bugs-To: https://github.com/Omeka/plugin-SimpleContactForm/issues\n"
 "POT-Creation-Date: 2013-07-06 00:06+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"

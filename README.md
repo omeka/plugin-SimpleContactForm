@@ -1,5 +1,5 @@
-Simple Contact Form (plugin for Omeka)
-======================================
+Simple Contact (plugin for Omeka)
+=================================
 
 
 Summary
@@ -15,8 +15,16 @@ shortcode.
 Installation
 ------------
 
-Unzip [Simple Contact Form] into the plugin directory, rename the folder
-"SimpleContactForm" if needed, then install it from the settings panel.
+Unzip [Simple Contact] into the plugin directory, rename the folder
+"SimpleContact" if needed, then install it from the settings panel.
+
+Upgrade to 0.6: unzip it in a separate folder and keep "SimpleContactForm"
+folder until end of installation, then uninstall and remove it. Config is
+automatically updated.
+
+
+Usage
+-----
 
 The main form is available at http://example.com/contact.
 
@@ -42,14 +50,14 @@ Warning
 
 Use it at your own risk.
 
-It's always recommended to backup your files and database so you can roll back
-if needed.
+It's always recommended to backup your files and database regularly so you can
+roll back if needed.
 
 
 Troubleshooting
 ---------------
 
-See online [Simple Contact Form issues] page on GitHub.
+See online [Simple Contact issues] page on GitHub.
 
 
 License
@@ -83,10 +91,12 @@ Current maintainers:
 Copyright
 ---------
 
-* Copyright 2008-2013 Roy Rosenzweig Center for History and New Media
+* Copyright 2008-2014 Roy Rosenzweig Center for History and New Media
+* Copyright 2013-2014 Daniel Berthereau (see [Daniel-KM] on GitHub)
 
 
 [Omeka]: https://omeka.org
-[Simple Contact Form]: https://github.com/Omeka/plugin-SimpleContactForm
-[Simple Contact Form issues]: https://github.com/Omeka/plugin-SimpleContactForm/issues
+[Simple Contact]: https://github.com/Omeka/plugin-SimpleContactForm
+[Simple Contact issues]: https://github.com/Omeka/plugin-SimpleContactForm/issues
 [GNU/GPL]: https://www.gnu.org/licenses/gpl-3.0.html
+[Daniel-KM]: https://github.com/Daniel-KM "Daniel Berthereau"
