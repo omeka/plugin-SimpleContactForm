@@ -9,10 +9,19 @@
 class SimpleContact_IndexController extends Omeka_Controller_AbstractActionController
 {
     /**
+     * Controller-wide initialization. Sets the underlying model to use.
+     */
+    public function init()
+    {
+        $this->_helper->db->setDefaultModelName('SimpleContact');
+    }
+
+    /**
      * Display the contact form.
      */
-    public function indexAction()
+    public function writeAction()
     {
+        // TODO Use a true form and getValue().
         $name = isset($_POST['name']) ? $_POST['name'] : '';
         $email = isset($_POST['email']) ? $_POST['email'] : '';
         $message = isset($_POST['message']) ? $_POST['message'] : '';
@@ -24,6 +33,7 @@ class SimpleContact_IndexController extends Omeka_Controller_AbstractActionContr
             // If the form submission is valid, then save message and, if
             // wanted, send out the email.
             if ($this->_validateFormSubmission($captchaObj)) {
+                $this->_saveContact($email, $name, $message, $path);
                 $this->_sendEmailNotification($email, $name, $message);
                 $url = SIMPLE_CONTACT_PATH . '/thankyou';
                 $this->_helper->redirector->goToUrl($url);
@@ -51,16 +61,18 @@ class SimpleContact_IndexController extends Omeka_Controller_AbstractActionContr
     protected function _validateFormSubmission($captcha = null)
     {
         $valid = true;
-        $msg = $this->getRequest()->getPost('message');
+        $message = $this->getRequest()->getPost('message');
         $email = $this->getRequest()->getPost('email');
         // ZF ReCaptcha ignores the 1st arg.
         if ($captcha and !$captcha->isValid('foo', $_POST)) {
             $this->_helper->flashMessenger(__('Your CAPTCHA submission was invalid, please try again.'));
             $valid = false;
-        } else if (!Zend_Validate::is($email, 'EmailAddress')) {
+        }
+        elseif (!Zend_Validate::is($email, 'EmailAddress')) {
             $this->_helper->flashMessenger(__('Please enter a valid email address.'));
             $valid = false;
-        } else if (empty($msg)) {
+        }
+        elseif (empty($message)) {
             $this->_helper->flashMessenger(__('Please enter a message.'));
             $valid = false;
         }
@@ -73,6 +85,32 @@ class SimpleContact_IndexController extends Omeka_Controller_AbstractActionContr
         return Omeka_Captcha::getCaptcha();
     }
 
+    /**
+     * Save the contact in the base.
+     */
+    protected function _saveContact($email, $name, $message, $path)
+    {
+        if (get_option('simple_contact_save_into_base')) {
+            $simpleContact = new SimpleContact;
+            $simpleContact->status = 'received';
+            $simpleContact->email = $email;
+            $simpleContact->name = $name;
+            $simpleContact->message = $message;
+            $simpleContact->path = $path;
+            // Need getValue to run the filter.
+            $simpleContact->ip = $_SERVER['REMOTE_ADDR'];
+            $simpleContact->user_agent = $_SERVER['HTTP_USER_AGENT'];
+            if ($user = current_user()) {
+                $simpleContact->user_id = $user->id;
+            }
+            $simpleContact->checkSpam();
+            $simpleContact->save();
+        }
+    }
+
+    /**
+     * Send the email notification to admin and user.
+     */
     protected function _sendEmailNotification($email, $name, $message)
     {
         // Notify the admin.
@@ -97,5 +135,32 @@ class SimpleContact_IndexController extends Omeka_Controller_AbstractActionContr
             $mail->setBodyText(get_option('simple_contact_notification_user_header') . "\n\n" . $message);
             $mail->send();
         }
+    }
+
+    /**
+     * Browse records action.
+     */
+    public function browseAction()
+    {
+        if (!$this->_hasParam('sort_field')) {
+            $this->_setParam('sort_field', 'added');
+        }
+
+        if (!$this->_hasParam('sort_dir')) {
+            $this->_setParam('sort_dir', 'd');
+        }
+        parent::browseAction();
+    }
+
+    /**
+     * Use global settings for determining browse page limits.
+     *
+     * @return int
+     */
+    public function _getBrowseRecordsPerPage()
+    {
+        return is_admin_theme()
+            ? (int) get_option('per_page_admin')
+            : (int) get_option('per_page_public');
     }
 }

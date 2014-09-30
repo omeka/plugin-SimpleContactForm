@@ -166,3 +166,56 @@ jQuery(window).load(function () {
         </div>
     </div>
 </fieldset>
+<fieldset id="fieldset-simple-contact-roles"><legend><?php echo __('Manage messages'); ?></legend>
+    <div class="field">
+        <div class="two columns alpha">
+            <?php echo $view->formLabel('simple_contact_save_into_base', __('Save received messages into base')); ?>
+        </div>
+        <div class='inputs five columns omega'>
+            <div class='input-block'>
+                <?php echo $view->formCheckbox('simple_contact_save_into_base', $save_into_base, null, array('1', '0')); ?>
+            </div>
+            <p class="explanation">
+                <?php echo __('If checked, all received messages will be saved into a specific table of the base.');?>
+            </p>
+        </div>
+    </div>
+    <div class="field">
+        <div class="two columns alpha">
+            <label><?php echo __("Roles that can manage emails"); ?></label>
+        </div>
+        <div class="inputs five columns omega">
+            <div class="input-block">
+                <?php
+                    $userRoles = get_user_roles();
+                    unset($userRoles['super']);
+                    echo '<ul>';
+                    foreach ($userRoles as $role => $label) {
+                        echo '<li>';
+                        echo $view->formCheckbox('simple_contact_manage_roles[]', $role, array(
+                            'checked'=> in_array($role, $manage_roles) ? 'checked' : '',
+                        ));
+                        echo $label;
+                        echo '</li>';
+                    }
+                    echo '</ul>';
+                ?>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="two columns alpha">
+            <label><?php echo __("WordPress API key for Akismet"); ?></label>
+        </div>
+        <div class="inputs five columns omega">
+            <div class="input-block">
+                <?php echo $view->formText('simple_contact_wpapi_key', $wpapi_key,
+                    array('size' => 45)
+                );?>
+            </div>
+            <p class="explanation">
+                <?php echo __('This key allows to check if the message is a spam.');?>
+            </p>
+        </div>
+    </div>
+</fieldset>

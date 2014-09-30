@@ -23,12 +23,14 @@ class SimpleContactPlugin extends Omeka_Plugin_AbstractPlugin
         'config_form',
         'config',
         'define_routes',
+        'define_acl',
     );
 
     /**
      * @var array Options and their default values.
      */
     protected $_filters = array(
+        'admin_navigation_main',
         'public_navigation_main',
     );
 
@@ -47,6 +49,9 @@ class SimpleContactPlugin extends Omeka_Plugin_AbstractPlugin
         'simple_contact_notification_user_from' => '',
         'simple_contact_notification_user_subject' => 'Thank You',
         'simple_contact_notification_user_header' => 'Thank you for sending us the following message:',
+        'simple_contact_save_into_base' => false,
+        'simple_contact_manage_roles' => 'a:1:{i:0;s:5:"admin";}',
+        'simple_contact_wpapi_key' => '',
     );
 
     /**
@@ -67,6 +72,7 @@ class SimpleContactPlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookInstall()
     {
+        $this->_installTable();
         $this->_options['simple_contact_notification_admin_to'] = get_option('administrator_email');
         $this->_options['simple_contact_notification_user_from'] = get_option('administrator_email');
         $this->_installOptions();
@@ -93,6 +99,39 @@ class SimpleContactPlugin extends Omeka_Plugin_AbstractPlugin
             set_option('simple_contact_notification_user_subject', get_option('simple_contact_form_user_notification_email_subject'));
             set_option('simple_contact_notification_user_header' , get_option('simple_contact_form_user_notification_email_message_header'));
         }
+
+        if (version_compare($oldVersion, '0.7', '<')) {
+            $this->_installTable();
+            set_option('simple_contact_save_into_base', $this->_options['simple_contact_save_into_base']);
+            set_option('simple_contact_manage_roles', $this->_options['simple_contact_manage_roles']);
+            set_option('simple_contact_wpapi_key', $this->_options['simple_contact_wpapi_key']);
+        }
+    }
+
+    /**
+     * Helper to install the base.
+     */
+    protected function _installTable()
+    {
+        $db = $this->_db;
+        $sql = "
+            CREATE TABLE IF NOT EXISTS `$db->SimpleContact` (
+            `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+            `status` enum('received', 'answered') NOT NULL DEFAULT 'received',
+            `is_spam` tinyint(1) NOT NULL DEFAULT '0',
+            `email` tinytext COLLATE utf8_unicode_ci,
+            `name` tinytext COLLATE utf8_unicode_ci,
+            `message` text COLLATE utf8_unicode_ci NOT NULL,
+            `path` tinytext COLLATE utf8_unicode_ci NOT NULL,
+            `ip` tinytext COLLATE utf8_unicode_ci,
+            `user_agent` tinytext COLLATE utf8_unicode_ci,
+            `user_id` int(11) DEFAULT NULL,
+            `added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (`id`),
+            KEY (`status`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+        ";
+        $db->query($sql);
     }
 
     /**
@@ -105,12 +144,11 @@ class SimpleContactPlugin extends Omeka_Plugin_AbstractPlugin
 
     /**
      * Shows plugin configuration page.
-     *
-     * @return void
      */
-    public function hookConfigForm()
+    public function hookConfigForm($args)
     {
-        echo get_view()->partial(
+        $view = $args['view'];
+        echo $view->partial(
             'plugins/simple-contact-config-form.php',
             array(
                 'page_contact_title' => get_option('simple_contact_page_contact_title'),
@@ -124,6 +162,9 @@ class SimpleContactPlugin extends Omeka_Plugin_AbstractPlugin
                 'notification_user_from' => get_option('simple_contact_notification_user_from'),
                 'notification_user_subject' => get_option('simple_contact_notification_user_subject'),
                 'notification_user_header' => get_option('simple_contact_notification_user_header'),
+                'save_into_base' => (boolean) get_option('simple_contact_save_into_base'),
+                'manage_roles' => unserialize(get_option('simple_contact_manage_roles')),
+                'wpapi_key' => get_option('simple_contact_wpapi_key'),
             )
         );
     }
@@ -136,6 +177,13 @@ class SimpleContactPlugin extends Omeka_Plugin_AbstractPlugin
     public function hookConfig($args)
     {
         $post = $args['post'];
+        foreach (array(
+                'simple_contact_manage_roles',
+            ) as $posted) {
+            $post[$posted] = isset($post[$posted])
+                ? serialize($post[$posted])
+                : serialize(array());
+        }
         foreach ($post as $key => $value) {
             set_option($key, $value);
         }
@@ -160,7 +208,7 @@ class SimpleContactPlugin extends Omeka_Plugin_AbstractPlugin
                 array(
                     'module' => 'simple-contact',
                     'controller' => 'index',
-                    'action' => 'index',
+                    'action' => 'write',
                 )
             )
         );
@@ -179,7 +227,51 @@ class SimpleContactPlugin extends Omeka_Plugin_AbstractPlugin
     }
 
     /**
-     * Adds contact us in navigation.
+     * Defines the plugin's access control list.
+     *
+     * @param object $args
+     */
+    public function hookDefineAcl($args)
+    {
+        // Everybody can write, of course. By default, only admin can manage.
+        $acl = $args['acl'];
+        $acl->addResource('SimpleContact_Contact');
+        $acl->allow(null, 'SimpleContact_Contact', array(
+            'write',
+            'thankyou',
+        ));
+
+        // Check that all the roles exist, in case a plugin-added role has
+        // been removed (e.g. GuestUser).
+        $manageRoles = unserialize(get_option('simple_contact_manage_roles'));
+        foreach ($manageRoles as $role) {
+            if ($acl->hasRole($role)) {
+                $acl->allow($role, 'SimpleContact_Contact', array(
+                    'browse',
+                    'update',
+                    'delete',
+                ));
+            }
+        }
+    }
+
+    /**
+     * Adds browse in admin navigation.
+     */
+    public function filterAdminNavigationMain($nav)
+    {
+        if (get_option('simple_contact_save_into_base') || total_records('SimpleContact') > 0) {
+            $nav[] = array(
+                'uri' => url('simple-contact/index/browse'),
+                'label' => __('Simple Contacts'),
+            );
+        }
+
+        return $nav;
+    }
+
+    /**
+     * Adds contact us in public navigation.
      */
     public function filterPublicNavigationMain($nav)
     {

@@ -11,6 +11,11 @@ to send a mail to a recipient. A notification can be sent to an admin too.
 The form can be used alone or be included in any page via a helper or a
 shortcode.
 
+If wanted, messages can be saved in the database in order to be able to manage
+them via the admin interface. This is useful if the server cannot send emails or
+for any particular reason. Furthermore, it adds the possibility to ask to
+Akismet if the message is a spam.
+
 
 Installation
 ------------
@@ -18,9 +23,9 @@ Installation
 Unzip [Simple Contact] into the plugin directory, rename the folder
 "SimpleContact" if needed, then install it from the settings panel.
 
-Upgrade to 0.6: unzip it in a separate folder and keep "SimpleContactForm"
-folder until end of installation, then uninstall and remove it. Config is
-automatically updated.
+Upgrade from prior than 0.6:
+unzip it in a separate folder and keep "SimpleContactForm" folder until end of
+installation, then uninstall and remove it. Config is automatically updated.
 
 
 Usage
@@ -30,13 +35,13 @@ The main form is available at http://example.com/contact.
 
 To add a simple contact form in a page, add this php code inside the view:
 
-```
+```php
     echo $this->simpleContactForm();
 ```
 
 You can add a default message like this:
 
-```
+```php
     echo $this->simpleContactForm(array(
         'message' => 'My default message',
     ));
