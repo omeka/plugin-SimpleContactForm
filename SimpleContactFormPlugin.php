@@ -64,6 +64,10 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
     {
         // Add translation.
         add_translation_source(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'languages');
+
+        if (version_compare(OMEKA_VERSION, '2.2', '>=')) {
+             add_shortcode('simple_contact', array($this, 'shortcodeSimpleContact'));
+        }
     }
 
     /**
@@ -168,5 +172,17 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         }
 
         return $nav;
+    }
+
+    /**
+     * Shortcode to a simple contact form.
+     *
+     * @param array $args
+     * @param Omeka_View $view
+     * @return string
+     */
+    public function shortcodeSimpleContact($args, $view)
+    {
+        return $view->simpleContactForm((array) $args);
     }
 }

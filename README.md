@@ -8,7 +8,8 @@ Summary
 This plugin for the [Omeka] platform adds a simple contact page to allow users
 to send a mail to a recipient. A notification can be sent to an admin too.
 
-The form can be used alone or be included in any page.
+The form can be used alone or be included in any page via a helper or a
+shortcode.
 
 
 Installation
@@ -32,6 +33,8 @@ You can add a default message like this:
         'message' => 'My default message',
     ));
 ```
+
+You can use the shortcode "simple_contact" too.
 
 
 Warning
