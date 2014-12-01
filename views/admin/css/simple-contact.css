@@ -1,0 +1,43 @@
+.simple-contacts-list {
+  padding: 0;
+  margin: 0;
+}
+.simple-contacts-list li {
+    list-style: none outside none;
+    padding-left: 10px;
+    display: inline-block;
+    font-family: "Arvo",serif;
+    margin: 0;
+    padding: 4px 4px 4px 4px;
+}
+
+a.simple-contact.status,
+a.simple-contact.is-spam {
+    position:relative;
+    padding-left: 20px;
+    margin-left: 3px;
+    margin-right: 3px;
+    cursor: pointer;
+}
+a.simple-contact.toggle-status.received {
+    background: url('../../../../../application/views/scripts/images/silk-icons/error.png') no-repeat scroll 0 0 transparent;
+}
+a.simple-contact.toggle-status.answered {
+    background: url('../../../../../application/views/scripts/images/silk-icons/tick.png') no-repeat scroll 0 0 transparent;
+}
+a.simple-contact.toggle-is-spam.not-spam {
+    background: url('../../../../../application/views/scripts/images/silk-icons/tick.png') no-repeat scroll 0 0 transparent;
+}
+a.simple-contact.toggle-is-spam.spam {
+    background: url('../../../../../application/views/scripts/images/silk-icons/cancel.png') no-repeat scroll 0 0 transparent;
+}
+a.simple-contact.toggle-is-spam.undefined {
+    background: url('../../../../../application/views/scripts/images/silk-icons/error.png') no-repeat scroll 0 0 transparent;
+}
+a.simple-contact.transmit {
+    background: url('../../shared/images/waiting-mini.gif') no-repeat scroll 0 0 transparent !important;
+}
+.action {
+    color: #338899;
+    cursor: pointer;
+}

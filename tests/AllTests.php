@@ -3,22 +3,22 @@
  * @version $Id$
  * @copyright Center for History and New Media, 2007-2014
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package SimpleContactForm
+ * @package SimpleContact
  */
 
-require_once 'SimpleContactForm_IntegrationHelper.php';
+require_once 'SimpleContact_IntegrationHelper.php';
 
 /**
- * Test suite for SimpleContactForm.
+ * Test suite for SimpleContact.
  *
- * @package SimpleContactForm
+ * @package SimpleContact
  * @copyright Center for History and New Media, 2007-2014
  */
-class SimpleContactForm_AllTests extends PHPUnit_Framework_TestSuite
+class SimpleContact_AllTests extends PHPUnit_Framework_TestSuite
 {
     public static function suite()
     {
-        $suite = new SimpleContactForm_AllTests('SimpleContactForm Tests');
+        $suite = new SimpleContact_AllTests('SimpleContact Tests');
         $testCollector = new PHPUnit_Runner_IncludePathTestCollector(
           array(dirname(__FILE__) . '/cases')
         );
