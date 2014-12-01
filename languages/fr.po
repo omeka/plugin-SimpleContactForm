@@ -1,0 +1,211 @@
+# Translation for the Simple Contact Form plugin for Omeka.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Omeka package.
+#
+# Daniel Berthereau <daniel.fr@berthereau.net>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: SimpleContactForm\n"
+"Report-Msgid-Bugs-To: https://github.com/Omeka/plugin-SimpleContactForm/issues"
+"\n"
+"POT-Creation-Date: 2013-07-06 00:06+0900\n"
+"PO-Revision-Date: 2013-07-06 16:44+0200\n"
+"Last-Translator: Daniel Berthereau <daniel.fr@berthereau.net>\n"
+"Language-Team: French <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: config_form.php:28
+msgid ""
+"You have not entered your <a href=\"http://recaptcha.net/\">reCAPTCHA</a> API "
+"keys under <a href=\"%s\">security settings</a>."
+msgstr ""
+"Vous n’avez pas indiqué vos clés de l’API <a href=\"http://recaptcha.net/\">"
+"reCAPTCHA</a> dans les <a href=\"%s\">paramètres de sécurité</a>."
+
+#: config_form.php:29
+msgid ""
+"We recommend adding these keys, or the contact form will be vulnerable to "
+"spam."
+msgstr ""
+"Omeka recommande d’ajouter ces clés, sinon le formulaire de contact sera "
+"vulnérable au spam."
+
+#: config_form.php:33
+msgid "Reply-From Email"
+msgstr "Mail de réponse"
+
+#: config_form.php:37
+msgid ""
+"The address that users can reply to. If blank, your users will not be sent "
+"confirmation emails of their submissions."
+msgstr ""
+"L’adresse à laquelle les visiteurs répondent. Si vide, ces derniers ne "
+"recevront pas de mail de confirmation à leurs messages."
+
+#: config_form.php:44
+msgid "Forward-To Email"
+msgstr "Mail du destinataire"
+
+#: config_form.php:48
+msgid ""
+"The email address that receives notifications that someone has submitted a "
+"message through the contact form. If blank, you will not be forwarded "
+"messages from your users."
+msgstr ""
+"L’adresse mail du destinataire des messages de notification, envoyés "
+"lorsqu’un message est soumis via le formulaire. Si vide, aucun message ne "
+"sera envoyé."
+
+#: config_form.php:56
+msgid "Email Subject (Admin Notification)"
+msgstr "Sujet du mail (notification de l’administrateur)"
+
+#: config_form.php:60
+msgid ""
+"The subject line for the email that is sent to the Forward-To email address."
+msgstr "Le sujet du mail envoyé au destinataire"
+
+#: config_form.php:67
+msgid "Email Message (Admin Notification)"
+msgstr "Message (notification de l'administration)"
+
+#: config_form.php:71
+msgid ""
+"The beginning of the message that is sent to the Forward-To email address."
+msgstr "Le début du message qui sera envoyé au destinataire."
+
+#: config_form.php:78
+msgid "Email Subject (Public Notification)"
+msgstr "Sujet du mail (notification publique)"
+
+#: config_form.php:82
+msgid ""
+"The subject line of the confirmation email that is sent to users who post "
+"messages through the form."
+msgstr ""
+"Le sujet du mail de confirmation envoyé aux visiteurs qui postent un message "
+"via ce formulaire."
+
+#: config_form.php:89
+msgid "Email Message (Public Notification)"
+msgstr "Message de confirmation (notification pour le visiteur)"
+
+#: config_form.php:93
+msgid ""
+"The beginning of the confirmation email that is sent to users who post "
+"messages through the form."
+msgstr ""
+"Le début du message de confirmation envoyé aux visiteurs qui postent un "
+"message via ce formulaire."
+
+#: config_form.php:100
+msgid "Contact Page Title"
+msgstr "Titre de la page de contact"
+
+#: config_form.php:104
+msgid "The title of the contact form (not HTML)."
+msgstr "Le titre du formulaire de contact (sans HTML)."
+
+#: config_form.php:110
+msgid "Instructions for Contact Page"
+msgstr "Instructions pour la page de contact"
+
+#: config_form.php:114
+msgid "Any specific instructions to add to the contact form."
+msgstr "Instructions spécifiques à ajouter dans le formulaire de contact."
+
+#: config_form.php:120
+msgid "Add to Main Navigation"
+msgstr "Ajouter au menu principal"
+
+#: config_form.php:124
+msgid "If checked, add a link to the contact form to the main site navigation."
+msgstr ""
+"Si coché, ajouter un lien vers le formulaire de contact dans le menu "
+"principal du site."
+
+#: config_form.php:131
+msgid "Thank You Page Title"
+msgstr "Titre de la page de remerciement"
+
+#: config_form.php:135
+msgid "The title of the Thank You page (not HTML)."
+msgstr "Le titre de votre page de remerciement (sans HTML)."
+
+#: config_form.php:141
+msgid "Thank You Page Message"
+msgstr "Merci pour votre page de message"
+
+#: config_form.php:145
+msgid "The text displayed on the Thank You page."
+msgstr "Le texte affiché sur la page de remerciement."
+
+#: controllers/IndexController.php:56
+msgid "Your CAPTCHA submission was invalid, please try again."
+msgstr "Le champ de test CAPTCHA est invalide. Merci de réessayer."
+
+#: controllers/IndexController.php:59
+msgid "Please enter a valid email address."
+msgstr "Merci d’indiquer une adresse valide."
+
+#: controllers/IndexController.php:62
+msgid "Please enter a message."
+msgstr "Merci d’entrer un message."
+
+#: SimpleContactFormPlugin.php:17
+msgid "contact/"
+msgstr "contact/"
+
+#: SimpleContactFormPlugin.php:18
+msgid "Contact Us"
+msgstr "Contactez-nous"
+
+#: SimpleContactFormPlugin.php:19
+msgid "Please send us your comments and suggestions."
+msgstr "Merci de nous adresser vos commentaires et suggestions."
+
+#: SimpleContactFormPlugin.php:20
+msgid "Thank You For Your Feedback"
+msgstr "Merci de votre message."
+
+#: SimpleContactFormPlugin.php:21
+msgid "We appreciate your comments and suggestions."
+msgstr "Nous apprécions vos commentaires et suggestions."
+
+#: SimpleContactFormPlugin.php:22
+msgid "A User Has Contacted You"
+msgstr "Un visiteur vous a contacté"
+
+#: SimpleContactFormPlugin.php:23
+msgid "A user has sent you the following message:"
+msgstr "Un visiteur a laissé le message suivant :"
+
+#: SimpleContactFormPlugin.php:24
+msgid "Thank You"
+msgstr "Merci"
+
+#: SimpleContactFormPlugin.php:25
+msgid "Thank you for sending us the following message:"
+msgstr "Merci de nous avoir envoyé le message suivant :"
+
+#: views/public/index/index.php:16
+msgid "Your Name:"
+msgstr "Votre nom :"
+
+#: views/public/index/index.php:22
+msgid "Your Email:"
+msgstr "Votre mail :"
+
+#: views/public/index/index.php:28
+msgid "Your Message:"
+msgstr "Votre message :"
+
+#: views/public/index/index.php:42
+msgid "Send Message"
+msgstr "Envoyer le message"
+

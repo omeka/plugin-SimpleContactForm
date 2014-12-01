@@ -1,22 +1,18 @@
 <?php
 /**
+ * Controller for Contact form.
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2014
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package SimpleContactForm
  */
 
-/**
- * Controller for Contact form.
- *
- * @package SimpleContactForm
- */
 class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionController
 {
     public function indexAction()
     {
         $name = isset($_POST['name']) ? $_POST['name'] : '';
-        $email = isset($_POST['email']) ? $_POST['email'] : '';;
-        $message = isset($_POST['message']) ? $_POST['message'] : '';;
+        $email = isset($_POST['email']) ? $_POST['email'] : '';
+        $message = isset($_POST['message']) ? $_POST['message'] : '';
 
         $captchaObj = $this->_setupCaptcha();
 
@@ -24,8 +20,8 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
             // If the form submission is valid, then send out the email
             if ($this->_validateFormSubmission($captchaObj)) {
             $this->sendEmailNotification($_POST['email'], $_POST['name'], $_POST['message']);
-                $url = WEB_ROOT."/".SIMPLE_CONTACT_FORM_PAGE_PATH."thankyou";
-                    $this->_helper->redirector->goToUrl($url);
+                $url = WEB_ROOT . '/' . SIMPLE_CONTACT_FORM_PAGE_PATH . 'thankyou';
+                $this->_helper->redirector->goToUrl($url);
             }
         }
 
@@ -37,7 +33,7 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
             $captcha = '';
         }
 
-        $this->view->assign(compact('name','email','message', 'captcha'));
+        $this->view->assign(compact('name', 'email', 'message', 'captcha'));
     }
 
     public function thankyouAction()
@@ -69,10 +65,10 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
         return Omeka_Captcha::getCaptcha();
     }
 
-    protected function sendEmailNotification($formEmail, $formName, $formMessage) 
+    protected function sendEmailNotification($formEmail, $formName, $formMessage)
     {
-        //notify the admin
-        //use the admin email specified in the plugin configuration.
+        // Notify the admin.
+        // Use the admin email specified in the plugin configuration.
         $forwardToEmail = get_option('simple_contact_form_forward_to_email');
         if (!empty($forwardToEmail)) {
             $mail = new Zend_Mail('UTF-8');
@@ -83,7 +79,7 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
             $mail->send();
         }
 
-        //notify the user who sent the message
+        // Notify the user who sent the message.
         $replyToEmail = get_option('simple_contact_form_reply_from_email');
         if (!empty($replyToEmail)) {
             $mail = new Zend_Mail('UTF-8');

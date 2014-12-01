@@ -1,18 +1,12 @@
 <?php
-
 /**
- * @version $Id$
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @copyright Center for History and New Media, 2010
- * @package SimpleContactForm
- */
-
-/**
- * SimpleContactForm plugin class
+ * SimpleContactFormPlugin class - represents the Simple Contact Form plugin
  *
- * @copyright Center for History and New Media, 2010
+ * @copyright Copyright 2008-2013 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  * @package SimpleContactForm
  */
+
 // Define Constants.
 define('SIMPLE_CONTACT_FORM_PAGE_PATH', 'contact/');
 define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE', 'Contact Us');
@@ -25,89 +19,96 @@ define('SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_SUBJECT', 'Thank You');
 define('SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_MESSAGE_HEADER', 'Thank you for sending us the following message:');
 define('SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION', 1);
 
-
 class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
 {
-    // Define Hooks
+    /**
+     * @var array Hooks for the plugin.
+     */
     protected $_hooks = array(
+        'initialize',
         'install',
         'uninstall',
-        'define_routes',
         'config_form',
-        'config'
+        'config',
+        'define_routes',
     );
 
-    //Add filters
+    /**
+     * @var array Options and their default values.
+     */
     protected $_filters = array(
-        'public_navigation_main'
+        'public_navigation_main',
     );
 
-   public function hookInstall()
-    {
-        set_option('simple_contact_form_reply_from_email', get_option('administrator_email'));
-        set_option('simple_contact_form_forward_to_email', get_option('administrator_email'));    
-        set_option('simple_contact_form_admin_notification_email_subject', SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_SUBJECT);
-        set_option('simple_contact_form_admin_notification_email_message_header', SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_MESSAGE_HEADER);
-        set_option('simple_contact_form_user_notification_email_subject', SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_SUBJECT);
-        set_option('simple_contact_form_user_notification_email_message_header', SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_MESSAGE_HEADER);
-        set_option('simple_contact_form_contact_page_title', SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE);
-        set_option('simple_contact_form_contact_page_instructions', SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS);
-        set_option('simple_contact_form_thankyou_page_title', SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE);
-        set_option('simple_contact_form_thankyou_page_message', SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE);    
-        set_option('simple_contact_form_add_to_main_navigation', SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION);    
-    }
+    /**
+     * @var array Options and their default values.
+     */
+    protected $_options = array(
+        'simple_contact_form_reply_from_email' => '',
+        'simple_contact_form_forward_to_email' => '',
+        'simple_contact_form_admin_notification_email_subject' => SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_SUBJECT,
+        'simple_contact_form_admin_notification_email_message_header' => SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_MESSAGE_HEADER,
+        'simple_contact_form_user_notification_email_subject' => SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_SUBJECT,
+        'simple_contact_form_user_notification_email_message_header' => SIMPLE_CONTACT_FORM_USER_NOTIFICATION_EMAIL_MESSAGE_HEADER,
+        'simple_contact_form_contact_page_title' => SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE,
+        'simple_contact_form_contact_page_instructions' => SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS,
+        'simple_contact_form_thankyou_page_title' => SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE,
+        'simple_contact_form_thankyou_page_message' => SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE,
+        'simple_contact_form_add_to_main_navigation' => SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION,
+    );
 
-    public function hookUninstall()
+    /**
+     * Initialize this plugin.
+     */
+    public function hookInitialize()
     {
-        delete_option('simple_contact_form_reply_from_email');
-        delete_option('simple_contact_form_forward_to_email');    
-        delete_option('simple_contact_form_admin_notification_email_subject');
-        delete_option('simple_contact_form_admin_notification_email_message_header');
-        delete_option('simple_contact_form_user_notification_email_subject');
-        delete_option('simple_contact_form_user_notification_email_message_header');
-        delete_option('simple_contact_form_contact_page_title');
-        delete_option('simple_contact_form_contact_page_instructions');
-        delete_option('simple_contact_form_thankyou_page_title');
-        delete_option('simple_contact_form_add_to_main_navigation');    
+        // Add translation.
+        add_translation_source(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'languages');
+
+        if (version_compare(OMEKA_VERSION, '2.2', '>=')) {
+             add_shortcode('simple_contact', array($this, 'shortcodeSimpleContact'));
+        }
     }
 
     /**
-     * Adds 2 routes for the form and the thank you page.
-     **/
-    function hookDefineRoutes($args)
+     * Installs the plugin.
+     */
+    public function hookInstall()
     {
-        $router = $args['router'];
-        $router->addRoute(
-            'simple_contact_form_form', 
-            new Zend_Controller_Router_Route(
-                SIMPLE_CONTACT_FORM_PAGE_PATH, 
-                array('module'       => 'simple-contact-form')
-            )
-        );
+        $this->_options['simple_contact_form_reply_from_email'] = get_option('administrator_email');
+        $this->_options['simple_contact_form_forward_to_email'] = get_option('administrator_email');
 
-        $router->addRoute(
-            'simple_contact_form_thankyou', 
-            new Zend_Controller_Router_Route(
-                SIMPLE_CONTACT_FORM_PAGE_PATH.'thankyou', 
-                array(
-                    'module'       => 'simple-contact-form', 
-                    'controller'   => 'index', 
-                    'action'       => 'thankyou', 
-                )
-            )
-        );
+        $this->_installOptions();
     }
 
-    public function hookConfigForm() 
+    /**
+     * Uninstalls the plugin.
+     */
+    public function hookUninstall()
+    {
+        $this->_uninstallOptions();
+    }
+
+    /**
+     * Shows plugin configuration page.
+     *
+     * @return void
+     */
+    public function hookConfigForm()
     {
         include 'config_form.php';
     }
 
+    /**
+     * Processes the configuration form.
+     *
+     * @return void
+     */
     public function hookConfig($args)
     {
         $post = $args['post'];
         set_option('simple_contact_form_reply_from_email', $post['reply_from_email']);
-        set_option('simple_contact_form_forward_to_email', $post['forward_to_email']);    
+        set_option('simple_contact_form_forward_to_email', $post['forward_to_email']);
         set_option('simple_contact_form_admin_notification_email_subject', $post['admin_notification_email_subject']);
         set_option('simple_contact_form_admin_notification_email_message_header', $post['admin_notification_email_message_header']);
         set_option('simple_contact_form_user_notification_email_subject', $post['user_notification_email_subject']);
@@ -119,18 +120,69 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         set_option('simple_contact_form_add_to_main_navigation', $post['add_to_main_navigation']);
     }
 
+    /**
+     * Adds 2 routes for the form and the thank you page.
+     */
+    function hookDefineRoutes($args)
+    {
+        // Don't add these routes on the admin side to avoid conflicts.
+        if (is_admin_theme()) {
+            return;
+        }
+
+        $router = $args['router'];
+
+        $router->addRoute(
+            'simple_contact_form_form',
+            new Zend_Controller_Router_Route(
+                SIMPLE_CONTACT_FORM_PAGE_PATH,
+                array(
+                    'module' => 'simple-contact-form',
+                )
+            )
+        );
+
+        $router->addRoute(
+            'simple_contact_form_thankyou',
+            new Zend_Controller_Router_Route(
+                SIMPLE_CONTACT_FORM_PAGE_PATH . 'thankyou',
+                array(
+                    'module'       => 'simple-contact-form',
+                    'controller'   => 'index',
+                    'action'       => 'thankyou',
+                )
+            )
+        );
+    }
+
+    /**
+     * Adds contact us in navigation.
+     */
     public function filterPublicNavigationMain($nav)
     {
         $contact_title = get_option('simple_contact_form_contact_page_title');
         $contact_add_to_navigation = get_option('simple_contact_form_add_to_main_navigation');
         if ($contact_add_to_navigation) {
             //$nav[$contact_title] = uri(array(), 'simple_contact_form_form');
-                $nav[] = array(
-                    'label'   => $contact_title,
-                    'uri'     => url(array(),'simple_contact_form_form'),
-                    'visible' => true
-                );
+            $nav[] = array(
+                'label'   => $contact_title,
+                'uri'     => url(array(),'simple_contact_form_form'),
+                'visible' => true
+            );
         }
+
         return $nav;
+    }
+
+    /**
+     * Shortcode to a simple contact form.
+     *
+     * @param array $args
+     * @param Omeka_View $view
+     * @return string
+     */
+    public function shortcodeSimpleContact($args, $view)
+    {
+        return $view->simpleContactForm((array) $args);
     }
 }
