@@ -8,7 +8,6 @@
     <?php echo flash(); ?>
     <form name="contact_form" id="contact-form"  method="post" enctype="multipart/form-data" accept-charset="utf-8">
 
-        <fieldset>
         <div class="field">
         <?php echo $this->formLabel('name', 'Your Name: '); ?>
             <div class='inputs'>
@@ -30,10 +29,6 @@
           </div>
         </div>
         
-        </fieldset>
-
-
-        <fieldset>
         <?php if ($captcha): ?>
         <div class="field">
             <?php echo $captcha; ?>
@@ -43,8 +38,6 @@
         <div class="field">
           <?php echo $this->formSubmit('send', 'Send Message'); ?>
         </div>
-        
-        </fieldset>
     </form>
 
 </div>
