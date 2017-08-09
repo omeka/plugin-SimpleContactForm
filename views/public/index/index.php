@@ -9,26 +9,26 @@
     <form name="contact_form" id="contact-form"  method="post" enctype="multipart/form-data" accept-charset="utf-8">
 
         <div class="field">
-        <?php echo $this->formLabel('name', 'Your Name: '); ?>
+        <?php echo $this->formLabel('name', __('Your Name: ')); ?>
             <div class='inputs'>
             <?php echo $this->formText('name', $name, array('class'=>'textinput')); ?>
             </div>
         </div>
-        
+
         <div class="field">
-            <?php echo $this->formLabel('email', 'Your Email: '); ?>
+            <?php echo $this->formLabel('email', __('Your Email: ')); ?>
             <div class='inputs'>
                 <?php echo $this->formText('email', $email, array('class'=>'textinput'));  ?>
             </div>
         </div>
-        
+
         <div class="field">
-          <?php echo $this->formLabel('message', 'Your Message: '); ?>
+          <?php echo $this->formLabel('message', __('Your Message: ')); ?>
           <div class='inputs'>
           <?php echo $this->formTextarea('message', $message, array('class'=>'textinput', 'rows' => '10')); ?>
           </div>
         </div>
-        
+
         <?php if ($captcha): ?>
         <div class="field">
             <?php echo $captcha; ?>
@@ -36,7 +36,7 @@
         <?php endif; ?>
 
         <div class="field">
-          <?php echo $this->formSubmit('send', 'Send Message'); ?>
+          <?php echo $this->formSubmit('send', __('Send Message')); ?>
         </div>
     </form>
 

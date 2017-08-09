@@ -17,6 +17,152 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: SimpleContactFormPlugin.php:41
+msgid "Contact Us"
+msgstr ""
+
+#: SimpleContactFormPlugin.php:42
+msgid "Please send us your comments and suggestions."
+msgstr ""
+
+#: SimpleContactFormPlugin.php:43
+msgid "Thank You For Your Feedback"
+msgstr ""
+
+#: SimpleContactFormPlugin.php:44
+msgid "We appreciate your comments and suggestions."
+msgstr ""
+
+#: SimpleContactFormPlugin.php:45
+msgid "A User Has Contacted You"
+msgstr ""
+
+#: SimpleContactFormPlugin.php:46
+msgid "A user has sent you the following message:"
+msgstr ""
+
+#: SimpleContactFormPlugin.php:47
+msgid "Thank You"
+msgstr ""
+
+#: SimpleContactFormPlugin.php:48
+msgid "Thank you for sending us the following message:"
+msgstr ""
+
+#: config_form.php:31
+#, php-format
+msgid ""
+"\n"
+"            You have not entered your <a href=\"https://www.google.com/"
+"recaptcha/intro/\" target=\"_blank\">reCAPTCHA</a>\n"
+"            API keys under <a href=\"%s\">security settings</a>.\n"
+"            We recommend adding these keys, or the contact form will be "
+"vulnerable to spam.\n"
+"          "
+msgstr ""
+
+#: config_form.php:43
+msgid "Reply-From Email"
+msgstr ""
+
+#: config_form.php:47
+msgid ""
+"The address that users can reply to. If blank, your users will not be sent "
+"confirmation emails of their submissions."
+msgstr ""
+
+#: config_form.php:53
+msgid "Forward-To Email"
+msgstr ""
+
+#: config_form.php:58
+msgid ""
+"\n"
+"            The email address that receives notifications that someone has\n"
+"            submitted a message through the contact form. If blank, you will "
+"not\n"
+"            be forwarded messages from your users.\n"
+"          "
+msgstr ""
+
+#: config_form.php:69
+msgid "Email Subject (Admin Notification)"
+msgstr ""
+
+#: config_form.php:73
+msgid ""
+"The subject line for the email that is sent to the Forward-To email address."
+msgstr ""
+
+#: config_form.php:79
+msgid "Email Message (Admin Notification)"
+msgstr ""
+
+#: config_form.php:83
+msgid ""
+"The beginning of the message that is sent to the Forward-To email address."
+msgstr ""
+
+#: config_form.php:89
+msgid "Email Subject (Public Notification)"
+msgstr ""
+
+#: config_form.php:93
+msgid ""
+"The subject line of the confirmation email that is sent to users who post "
+"messages through the form."
+msgstr ""
+
+#: config_form.php:99
+msgid "Email Message (Public Notification)"
+msgstr ""
+
+#: config_form.php:103
+msgid ""
+"The beginning of the confirmation email that is sent to users who post "
+"messages through the form."
+msgstr ""
+
+#: config_form.php:109
+msgid "Contact Page Title"
+msgstr ""
+
+#: config_form.php:113
+msgid "The title of the contact form (not HTML)."
+msgstr ""
+
+#: config_form.php:119
+msgid "Instructions for Contact Page"
+msgstr ""
+
+#: config_form.php:123
+msgid "Any specific instructions to add to the contact form."
+msgstr ""
+
+#: config_form.php:129
+msgid "Add to Main Navigation"
+msgstr ""
+
+#: config_form.php:133
+msgid "If checked, add a link to the contact form to the main site navigation."
+msgstr ""
+
+#: config_form.php:139
+msgid "Thank You Page Title"
+msgstr ""
+
+#: config_form.php:143
+msgid "The title of the Thank You page (not HTML)."
+msgstr ""
+
+#: config_form.php:149
+msgid "Thank You Page Message"
+msgstr ""
+
+#: config_form.php:153
+msgid "The text displayed on the Thank You page."
+msgstr ""
+
 #: controllers/IndexController.php:54
 msgid "Your CAPTCHA submission was invalid, please try again."
 msgstr ""
@@ -27,4 +173,20 @@ msgstr ""
 
 #: controllers/IndexController.php:60
 msgid "Please enter a message."
+msgstr ""
+
+#: views/public/index/index.php:12
+msgid "Your Name: "
+msgstr ""
+
+#: views/public/index/index.php:19
+msgid "Your Email: "
+msgstr ""
+
+#: views/public/index/index.php:26
+msgid "Your Message: "
+msgstr ""
+
+#: views/public/index/index.php:39
+msgid "Send Message"
 msgstr ""
