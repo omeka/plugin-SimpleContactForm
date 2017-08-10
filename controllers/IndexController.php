@@ -21,9 +21,10 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
         $captchaObj = $this->_setupCaptcha();
 
         if ($this->getRequest()->isPost()) {
+            $additionalFields = SimpleContactFormPlugin::prepareAdditionalFields();
             // If the form submission is valid, then send out the email
-            if ($this->_validateFormSubmission($captchaObj)) {
-            $this->sendEmailNotification($_POST['email'], $_POST['name'], $_POST['message']);
+            if ($this->_validateFormSubmission($captchaObj, $additionalFields)) {
+                $this->sendEmailNotification($_POST['email'], $_POST['name'], $_POST['message'], $additionalFields);
                 $url = WEB_ROOT."/".SIMPLE_CONTACT_FORM_PAGE_PATH."thankyou";
                     $this->_helper->redirector->goToUrl($url);
             }
@@ -44,7 +45,7 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
     {
     }
 
-    protected function _validateFormSubmission($captcha = null)
+    protected function _validateFormSubmission($captcha = null, $additionalFields)
     {
         $valid = true;
         $msg = $this->getRequest()->getPost('message');
@@ -59,6 +60,21 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
         } else if (empty($msg)) {
             $this->_helper->flashMessenger(__('Please enter a message.'));
             $valid = false;
+        } else {
+          foreach($additionalFields as $additionalField) {
+            if ($additionalField["mandatoryField"]) {
+              $empty = (
+                $additionalField["fieldType"] == "dropdown"
+                  ? ($additionalField["fieldValue"] == -1)
+                  : (empty($additionalField["fieldValue"]))
+              );
+              if ($empty) {
+                $this->_helper->flashMessenger( sprintf(__('You may not leave the "%s" field undefined.'), $additionalField["fieldLabel"]) );
+                $valid = false;
+                break;
+              }
+            }
+          }
         }
 
         return $valid;
@@ -69,14 +85,26 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
         return Omeka_Captcha::getCaptcha();
     }
 
-    protected function sendEmailNotification($formEmail, $formName, $formMessage) 
+    protected function sendEmailNotification($formEmail, $formName, $formMessage, $additionalFields)
     {
+
+        // compose text from additional fields (if present)
+        $additionalText = "";
+        foreach($additionalFields as $additionalField) {
+          $additionalText .=
+            "\n\n"
+            . $additionalField["fieldLabel"] . ": "
+            . ($additionalField["fieldType"] == "multi" ? "\n\n" : "")
+            . $additionalField["fieldValue"]
+          ;
+        }
+
         //notify the admin
         //use the admin email specified in the plugin configuration.
         $forwardToEmail = get_option('simple_contact_form_forward_to_email');
         if (!empty($forwardToEmail)) {
             $mail = new Zend_Mail('UTF-8');
-            $mail->setBodyText(get_option('simple_contact_form_admin_notification_email_message_header') . "\n\n" . $formMessage);
+            $mail->setBodyText(get_option('simple_contact_form_admin_notification_email_message_header') . "\n\n" . $formMessage . $additionalText);
             $mail->setFrom($formEmail, $formName);
             $mail->addTo($forwardToEmail);
             $mail->setSubject(get_option('site_title') . ' - ' . get_option('simple_contact_form_admin_notification_email_subject'));
@@ -87,7 +115,7 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
         $replyToEmail = get_option('simple_contact_form_reply_from_email');
         if (!empty($replyToEmail)) {
             $mail = new Zend_Mail('UTF-8');
-            $mail->setBodyText(get_option('simple_contact_form_user_notification_email_message_header') . "\n\n" . $formMessage);
+            $mail->setBodyText(get_option('simple_contact_form_user_notification_email_message_header') . "\n\n" . $formMessage . $additionalText);
             $mail->setFrom($replyToEmail);
             $mail->addTo($formEmail, $formName);
             $mail->setSubject(get_option('site_title') . ' - ' . get_option('simple_contact_form_user_notification_email_subject'));

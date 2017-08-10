@@ -10,7 +10,7 @@ jQuery(window).load(function () {
 
 <?php
 $reply_from_email                        = get_option('simple_contact_form_reply_from_email');
-$forward_to_email                        = get_option('simple_contact_form_forward_to_email');	
+$forward_to_email                        = get_option('simple_contact_form_forward_to_email');
 $admin_notification_email_subject        = get_option('simple_contact_form_admin_notification_email_subject');
 $admin_notification_email_message_header = get_option('simple_contact_form_admin_notification_email_message_header');
 $user_notification_email_subject         = get_option('simple_contact_form_user_notification_email_subject');
@@ -20,6 +20,8 @@ $contact_page_instructions               = get_option('simple_contact_form_conta
 $thankyou_page_title                     = get_option('simple_contact_form_thankyou_page_title');
 $thankyou_page_message                   = get_option('simple_contact_form_thankyou_page_message');
 $add_to_main_navigation                  = get_option('simple_contact_form_add_to_main_navigation');
+$additional_fields                       = get_option('simple_contact_form_additional_fields');
+$mandatory_fields                        = get_option('simple_contact_form_mandatory_additional_fields');
 
 $view = get_view();
 ?>
@@ -65,7 +67,7 @@ $view = get_view();
     </div>
 </div>
 
- <div class="field">
+<div class="field">
     <?php echo $view->formLabel('admin_notification_email_subject', __('Email Subject (Admin Notification)')); ?>
     <div class="inputs">
         <?php echo $view->formText('admin_notification_email_subject', $admin_notification_email_subject, array('class' => 'textinput')); ?>
@@ -75,7 +77,7 @@ $view = get_view();
     </div>
 </div>
 
- <div class="field">
+<div class="field">
     <?php echo $view->formLabel('admin_notification_email_message_header', __('Email Message (Admin Notification)')); ?>
     <div class="inputs">
         <?php echo $view->formTextarea('admin_notification_email_message_header', $admin_notification_email_message_header, array('rows' => '10', 'cols' => '60', 'class' => 'textinput')); ?>
@@ -85,7 +87,7 @@ $view = get_view();
     </div>
 </div>
 
- <div class="field">
+<div class="field">
     <?php echo $view->formLabel('user_notification_email_subject', __('Email Subject (Public Notification)')); ?>
     <div class="inputs">
         <?php echo $view->formText('user_notification_email_subject', $user_notification_email_subject, array('class' => 'textinput')); ?>
@@ -95,7 +97,7 @@ $view = get_view();
     </div>
 </div>
 
- <div class="field">
+<div class="field">
     <?php echo $view->formLabel('user_notification_email_message_header', __('Email Message (Public Notification)')); ?>
     <div class="inputs">
         <?php echo $view->formTextarea('user_notification_email_message_header', $user_notification_email_message_header, array('rows' => '10', 'cols' => '60', 'class' => 'textinput')); ?>
@@ -153,4 +155,31 @@ $view = get_view();
             <?php echo __("The text displayed on the Thank You page."); ?>
         </p>
     </div>
+</div>
+
+<div class="field">
+   <?php echo $view->formLabel('additional_fields', __('Additional Fields')); ?>
+   <div class="inputs">
+       <?php echo $view->formTextarea('additional_fields', $additional_fields, array('rows' => '10', 'cols' => '60', 'class' => 'textinput')); ?>
+       <div class="explanation">
+         <p><?php echo __("If you wish to add additional fields (besides name, email, and message), you may specify them here, one per line."); ?></p>
+         <p>
+           <?php echo __("A line usually consists of the field name and the field label, separated by a semicolon. Like <pre>newfield;Additional Field</pre>"); ?>
+           <?php echo __(" <em>Please note:</em> Field names may consist only of letters (a-z), numbers (0-9), underscores (_), dashes (-), or dots (.)."); ?>
+         </p>
+         <p><?php echo __("If you wish to have a multi-line text-field, add 'multi', like this: <pre>newmultifield;Additional Multi-Line Field;multi</pre>"); ?></p>
+         <p><?php echo __("If you wish to have a dropdown selection, add 'dropdown', followed by the possible choices, like this: <pre>newdropdownfield;Additional Dropdown Field;dropdown;Choice 1;Choice 2;Choice 3</pre>"); ?></p>
+       </div>
+   </div>
+</div>
+
+<div class="field">
+   <?php echo $view->formLabel('mandatory_fields', __('Mandatory Fields')); ?>
+   <div class="inputs">
+       <?php echo $view->formText('mandatory_fields', $mandatory_fields, array('class' => 'textinput')); ?>
+       <div class="explanation">
+           <p><?php echo __("If you defined additional fields, you may now specify which of them are mandatory, i.e. which should not be left blank."); ?></p>
+           <p><?php echo __("You may specify them one by one, separated by semicolons, like this: <pre>field1;field2</pre>"); ?></p>
+       </div>
+   </div>
 </div>
