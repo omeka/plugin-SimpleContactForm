@@ -53,7 +53,8 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
 
         set_option('simple_contact_form_add_to_main_navigation', 1);
         set_option('simple_contact_form_additional_fields', '');
-        set_option('simple_contact_form_mandatory_additional_fields', '');
+        set_option('simple_contact_form_mandatory_fields', '');
+        set_option('simple_contact_form_reorder_fields', '');
     }
 
     public function hookUninstall()
@@ -69,7 +70,8 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         delete_option('simple_contact_form_thankyou_page_title');
         delete_option('simple_contact_form_add_to_main_navigation');
         delete_option('simple_contact_form_additional_fields');
-        delete_option('simple_contact_form_mandatory_additional_fields');
+        delete_option('simple_contact_form_mandatory_fields');
+        delete_option('simple_contact_form_reorder_fields');
     }
 
     /**
@@ -127,7 +129,8 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         set_option('simple_contact_form_thankyou_page_message', $post['thankyou_page_message']);
         set_option('simple_contact_form_add_to_main_navigation', $post['add_to_main_navigation']);
         set_option('simple_contact_form_additional_fields', $post['additional_fields']);
-        set_option('simple_contact_form_mandatory_additional_fields', $post['mandatory_fields']);
+        set_option('simple_contact_form_mandatory_fields', $post['mandatory_fields']);
+        set_option('simple_contact_form_reorder_fields', $post['reorder_fields']);
     }
 
     public function filterPublicNavigationMain($nav)
@@ -145,9 +148,9 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         return $nav;
     }
 
-    public function prepareAdditionalFields() {
+    public function prepareFields() {
 
-      $mandatory_fields = get_option('simple_contact_form_mandatory_additional_fields');
+      $mandatory_fields = get_option('simple_contact_form_mandatory_fields');
       $mandatoryFields = explode(";", $mandatory_fields);
       foreach(array_keys($mandatoryFields) as $key) {
         $mandatoryFields[$key] = trim($mandatoryFields[$key]);
@@ -159,7 +162,9 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
       $additional_fields = get_option('simple_contact_form_additional_fields');
       $lines = explode("\n", $additional_fields);
 
-      $result = array();
+      $additionalFields = array();
+
+      $fieldNames = array( 'name', 'email', 'message' );
 
       foreach($lines as $line) {
         $params = explode(";", $line);
@@ -179,7 +184,8 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
 
             if ($dropDown) {
               $dropDowns = array( -1 => __("Select Below") );
-              for($i=3; $i<count($params); $i++) {
+              $maxCnt=count($params);
+              for($i=3; ($i<$maxCnt); $i++) {
                 $dropDowns[$params[$i]] = $params[$i];
                 unset($params[$i]);
               }
@@ -191,7 +197,7 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
 
             $fieldValue = ( isset($_POST[$fieldName]) ? $_POST[$fieldName] : "" );
 
-            $result[] = array(
+            $additionalFields[$fieldName] = array(
               "fieldName" => $fieldName,
               "fieldLabel" => $fieldLabel,
               "fieldType" => $fieldType,
@@ -200,12 +206,39 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
               "mandatoryField" => intval( isset($mandatoryFields[$fieldName]) ),
             );
 
+            $fieldNames[] = $fieldName;
+
           }
         }
       }
+      // echo "<pre>" . print_r($fieldNames,true) . "</pre>";
 
-      return $result;
+      $reorder_fields = get_option('simple_contact_form_reorder_fields');
+      $reorderFields = explode(";", $reorder_fields);
+      foreach(array_keys($reorderFields) as $key) {
+        $reorderFields[$key] = trim($reorderFields[$key]);
+        $match = preg_match(ALLOWED_FIELDNAME, $reorderFields[$key]);
+        if (!$match) { unset($reorderFields[$key]); }
+      }
+      // echo "<pre>" . print_r($reorderFields,true) . "</pre>";
 
-    } // function prepareAdditionalFields()
+      $fieldOrder = array();
+      foreach($reorderFields as $reorderField) {
+        $idx = array_search($reorderField, $fieldNames);
+        if ($idx !== false) {
+          $fieldOrder[] = $reorderField;
+          unset( $fieldNames[$idx] );
+        }
+      }
+      foreach($fieldNames as $fieldName) { $fieldOrder[] = $fieldName; }
+      // echo "<pre>" . print_r($fieldOrder,true) . "</pre>";
+
+      return array(
+        "additionalFields" => $additionalFields,
+        "fieldOrder" => $fieldOrder,
+        "mandatoryFields" => $mandatoryFields,
+      );
+
+    } // function prepareFields()
 
 }

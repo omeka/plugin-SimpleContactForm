@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SimpleContactForm\n"
 "Report-Msgid-Bugs-To: http://github.com/GerZah/plugin-Network/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2017-08-10 17:55+0200\n"
+"PO-Revision-Date: 2017-09-07 14:06+0200\n"
 "Last-Translator: Gero Zahn <gerozahn@campus.uni-paderborn.de>, 2017\n"
 "Language-Team: German (Germany) (https://www.transifex.com/upb/teams/56327/de_DE/)\n"
 "MIME-Version: 1.0\n"
@@ -50,11 +50,11 @@ msgstr "Danke für Ihr Feedback!"
 msgid "We appreciate your comments and suggestions."
 msgstr "Wir freuen uns über Anmerkungen oder Empfehlungen."
 
-#: SimpleContactFormPlugin.php:181
+#: SimpleContactFormPlugin.php:186
 msgid "Select Below"
 msgstr "Unten auswählen"
 
-#: config_form.php:33
+#: config_form.php:34
 #, php-format
 msgid ""
 "\n"
@@ -66,19 +66,19 @@ msgstr ""
 "\n"
 "Sie haben in den <a href=\"%s\">Sicherheitseinstellungen</a> ihre <a href=\"https://www.google.com/recaptcha/intro/\" target=\"_blank\">reCAPTCHA API-Schlüssel</a> nicht eingegeben. Wir empfehlen, diese Schlüssel einzugeben, denn anderenfalls ist das Kontaktformular anfällig für Spam."
 
-#: config_form.php:45
+#: config_form.php:46
 msgid "Reply-From Email"
 msgstr "Absender-E-Mail-Adresse"
 
-#: config_form.php:49
+#: config_form.php:50
 msgid "The address that users can reply to. If blank, your users will not be sent confirmation emails of their submissions."
 msgstr "Die Adresse, an die die Benutzer antworten können. Wenn sie leer gelassen wird, werden Ihre Benutzer keine Bestätigungs-E-Mail für Ihre Einsendungen erhalten."
 
-#: config_form.php:55
+#: config_form.php:56
 msgid "Forward-To Email"
 msgstr "Weiterleitungs-E-Mail-Adresse"
 
-#: config_form.php:60
+#: config_form.php:61
 msgid ""
 "\n"
 "            The email address that receives notifications that someone has\n"
@@ -89,147 +89,163 @@ msgstr ""
 "\n"
 "Die E-Mail-Adresse, die die Benachrichtigungen erhält, dass jemand eine Nachricht mit dem Kontaktformular übermittelt hat. Wenn sie leer gelassen wird, werden Sie keine Nachrichten von Ihren Benutzern weitergeleitet bekommen."
 
-#: config_form.php:71
+#: config_form.php:72
 msgid "Email Subject (Admin Notification)"
 msgstr "E-Mail-Betreff (Administrator-Benachrichtigung)"
 
-#: config_form.php:75
+#: config_form.php:76
 msgid "The subject line for the email that is sent to the Forward-To email address."
 msgstr "Die Betreff-Zeile für die E-Mail, die an die Weiterleitungs-E-Mail-Adresse geschickt wird."
 
-#: config_form.php:81
+#: config_form.php:82
 msgid "Email Message (Admin Notification)"
 msgstr "E-Mail-Nachricht (Administrator-Benachrichtigung)"
 
-#: config_form.php:85
+#: config_form.php:86
 msgid "The beginning of the message that is sent to the Forward-To email address."
 msgstr "Die Einleitung der Nachricht, die an die Weiterleitungs-E-Mail-Adresse geschickt wird."
 
-#: config_form.php:91
+#: config_form.php:92
 msgid "Email Subject (Public Notification)"
 msgstr "E-Mail-Betreff (öffentliche Benachrichtigung)"
 
-#: config_form.php:95
+#: config_form.php:96
 msgid "The subject line of the confirmation email that is sent to users who post messages through the form."
 msgstr "Die Betreff-Zeile der Bestätigungs-E-Mail, die an den Benutzer geschickt wird, der die Nachricht mit Hilfe des Formulars verschickt hat."
 
-#: config_form.php:101
+#: config_form.php:102
 msgid "Email Message (Public Notification)"
 msgstr "E-Mail-Nachricht (öffentliche Benachrichtigung)"
 
-#: config_form.php:105
+#: config_form.php:106
 msgid "The beginning of the confirmation email that is sent to users who post messages through the form."
 msgstr "Die Einleitung der Nachricht, die an den Benutzer geschickt wird, der die Nachricht mit Hilfe des Formulars verschickt hat."
 
-#: config_form.php:111
+#: config_form.php:112
 msgid "Contact Page Title"
 msgstr "Titel für Kontaktseite"
 
-#: config_form.php:115
+#: config_form.php:116
 msgid "The title of the contact form (not HTML)."
 msgstr "Der Titel der Kontakt-Seite (kein HTML)"
 
-#: config_form.php:121
+#: config_form.php:122
 msgid "Instructions for Contact Page"
 msgstr "Anleitung für die Kontakt-Seite"
 
-#: config_form.php:125
+#: config_form.php:126
 msgid "Any specific instructions to add to the contact form."
 msgstr "Jedwede zusätzliche Information, die zum Kontaktformular hinzugefügt werden soll."
 
-#: config_form.php:131
+#: config_form.php:132
 msgid "Add to Main Navigation"
 msgstr "Zur Haupt-Navigation hinzufügen"
 
-#: config_form.php:135
+#: config_form.php:136
 msgid "If checked, add a link to the contact form to the main site navigation."
 msgstr "Ist dieses Feld angekreuzt, wird ein Link zum Kontaktformular zur Haupt-Website-Navigation hinzugefügt."
 
-#: config_form.php:141
+#: config_form.php:142
 msgid "Thank You Page Title"
 msgstr "Titel Danksagungs-Seite"
 
-#: config_form.php:145
+#: config_form.php:146
 msgid "The title of the Thank You page (not HTML)."
 msgstr "Der Titel der Danksagungs-Seite (kein HTML)"
 
-#: config_form.php:151
+#: config_form.php:152
 msgid "Thank You Page Message"
 msgstr "Nachricht der Danksagungs-Seite"
 
-#: config_form.php:155
+#: config_form.php:156
 msgid "The text displayed on the Thank You page."
 msgstr "Der Text, der auf der Danksagungs-Seite angezeigt wird."
 
-#: config_form.php:161
+#: config_form.php:162
 msgid "Additional Fields"
 msgstr "Zusätzliche Felder"
 
-#: config_form.php:165
+#: config_form.php:166
 msgid "If you wish to add additional fields (besides name, email, and message), you may specify them here, one per line."
 msgstr "Wenn Sie (außer Namen, E-Mail-Adresse und Nachricht) weitere Felder hinzufügen möchten, spezifizieren Sie diese hier, und zwar einen pro Zeile."
 
-#: config_form.php:167
+#: config_form.php:168
 msgid "A line usually consists of the field name and the field label, separated by a semicolon. Like <pre>newfield;Additional Field</pre>"
 msgstr "Eine Zeile besteht üblicherweise aus einem Feld-Bezeichner und einer Feld-Überschrift, getrennt durch ein Semikolon. In der Form <pre>neuesfeld;Zusätzliches Feld</pre>"
 
-#: config_form.php:168
+#: config_form.php:169
 msgid " <em>Please note:</em> Field names may consist only of letters (a-z), numbers (0-9), underscores (_), dashes (-), or dots (.)."
 msgstr "<em>Bitte beachten Sie:</em> Feldnamen dürfen nur aus Buchstaben (a-z), Nummern (0-9), Unterstrichen (_), Strichen (-) oder Punkten (.) bestehen."
 
-#: config_form.php:170
+#: config_form.php:171
 msgid "If you wish to have a multi-line text-field, add 'multi', like this: <pre>newmultifield;Additional Multi-Line Field;multi</pre>"
 msgstr ""
 "Wenn Sie ein mehrzeiliges Textfeld verwenden möchten, fügen Sie 'multi' an. In der Form:\n"
 "<pre>neuesmultifeld;Zusätzliches mehrzeiliges Feld;multi</pre>"
 
-#: config_form.php:171
+#: config_form.php:172
 msgid "If you wish to have a dropdown selection, add 'dropdown', followed by the possible choices, like this: <pre>newdropdownfield;Additional Dropdown Field;dropdown;Choice 1;Choice 2;Choice 3</pre>"
 msgstr ""
 "Wenn Sie ein ausklappbares Auswahlfeld verwenden wollen, fügen Sie 'dropdown' hinzu, gefolgt von den möglichen Alternativen. In der Form\n"
 "<pre>neuesdropdownfeld;Neues Auswahlfeld;dropdown;Alternative 1;Alternative 2;Alternative 3</pre>"
 
-#: config_form.php:177
+#: config_form.php:178
 msgid "Mandatory Fields"
 msgstr "Zwingend auszufüllende Felder"
 
-#: config_form.php:181
+#: config_form.php:182
 msgid "If you defined additional fields, you may now specify which of them are mandatory, i.e. which should not be left blank."
 msgstr "Wenn Sie zusätzliche Felder definiert haben, können Sie hier definieren, welche von Ihnen zwingend auszufüllen sind, d.h. nicht leer gelassen werden dürfen."
 
-#: config_form.php:182
+#: config_form.php:183
 msgid "You may specify them one by one, separated by semicolons, like this: <pre>field1;field2</pre>"
 msgstr "Sie können diese eines nach dem anderen definieren, getrennt durch Semikolons. In der Form: <pre>Feld1;Feld2</pre>"
 
-#: controllers/IndexController.php:55
+#: config_form.php:189
+msgid "Re-order Fields"
+msgstr "Felder umsortieren"
+
+#: config_form.php:193
+msgid "If you do not want to have the pre-defined fields 'name', 'email', and 'message' at the top of your form, simple specify the field names one by one, separated by semicolons, like this: <pre>field1;name;field2;email;field3;message</pre>"
+msgstr "Wenn Sie die vordefinierten Felder 'name', 'email' und 'message' nicht am oberen Ende des Formulars stehen haben wollen, spezifizieren Sie einfach die Feldnamen eines nach dem anderen. In der Form: <pre>feld1;name;feld2;email;feld3;message</pre>"
+
+#: config_form.php:194
+msgid "Field with names that are not specified in this list (especially when left blank) will be ordered as pre-defined ('name', 'email', and 'message'), followed by the ones that you defined yourself in that particular order that you gave."
+msgstr "Felder mit Namen, die nicht in der Liste spezifiziert sind (insbesondere, wenn das Feld leer gelassen wird), erscheinen wir vordefiniert ('name', 'email' und 'message'), gefolgt von den von Ihnen definierten Feldern in der von Ihnen definierten Reihenfolge."
+
+#: controllers/IndexController.php:57
 msgid "Your CAPTCHA submission was invalid, please try again."
 msgstr "Ihre CAPTCHA Eingabe war ungültig. Bitte versuchen Sie es erneut."
 
-#: controllers/IndexController.php:58
+#: controllers/IndexController.php:60
 msgid "Please enter a valid email address."
 msgstr "Bitte geben Sie eine gültige E-Mail-Adresse ein."
 
-#: controllers/IndexController.php:61
+#: controllers/IndexController.php:63
 msgid "Please enter a message."
 msgstr "Bitte geben Sie eine Nachricht ein."
 
-#: controllers/IndexController.php:72
+#: controllers/IndexController.php:66
+msgid "Please enter a name."
+msgstr "Bitte geben Sie einen Namen ein."
+
+#: controllers/IndexController.php:77
 #, php-format
 msgid "You may not leave the \"%s\" field undefined."
 msgstr "Sie dürfen das “%s\" Feld nicht undefiniert lassen."
 
-#: views/public/index/index.php:12
-msgid "Your Name:"
-msgstr "Ihr Name:"
-
-#: views/public/index/index.php:19
+#: controllers/IndexController.php:113 views/public/index/index.php:38
 msgid "Your Email:"
 msgstr "Ihre E-Mail-Adresse:"
 
-#: views/public/index/index.php:27
+#: controllers/IndexController.php:114 views/public/index/index.php:21
+msgid "Your Name:"
+msgstr "Ihr Name:"
+
+#: controllers/IndexController.php:115 views/public/index/index.php:50
 msgid "Your Message:"
 msgstr "Ihre Nachricht:"
 
-#: views/public/index/index.php:73
+#: views/public/index/index.php:97
 msgid "Send Message"
 msgstr "Nachricht absenden"
