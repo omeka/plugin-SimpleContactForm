@@ -8,12 +8,9 @@ jQuery(document).ready(function () {
 </script>
 
 <?php
-$reply_from_email                        = get_option('simple_contact_form_reply_from_email');
 $forward_to_email                        = get_option('simple_contact_form_forward_to_email');	
 $admin_notification_email_subject        = get_option('simple_contact_form_admin_notification_email_subject');
 $admin_notification_email_message_header = get_option('simple_contact_form_admin_notification_email_message_header');
-$user_notification_email_subject         = get_option('simple_contact_form_user_notification_email_subject');
-$user_notification_email_message_header  = get_option('simple_contact_form_user_notification_email_message_header');
 $contact_page_title                      = get_option('simple_contact_form_contact_page_title');
 $contact_page_instructions               = get_option('simple_contact_form_contact_page_instructions');
 $thankyou_page_title                     = get_option('simple_contact_form_thankyou_page_title');
@@ -27,19 +24,6 @@ $view = get_view();
     <p class="alert">You have not entered your <a href="http://www.google.com/recaptcha/intro/index.html/">reCAPTCHA</a>
         API keys under <a href="<?php echo url('settings/edit-security#fieldset-captcha'); ?>">security settings</a>. We recommend adding these keys, or the contact form will be vulnerable to spam.</p>
 <?php endif; ?>
-
-<div class="field">
-    <div class="two columns alpha">
-    <?php echo $view->formLabel('reply_from_email', 'Reply-From Email'); ?>
-    </div>
-    <div class="inputs five columns omega">
-        <p class="explanation">
-            The address that users can reply to. If blank, your users will not
-            be sent confirmation emails of their submissions.
-        </p>
-        <?php echo $view->formText('reply_from_email', $reply_from_email); ?>
-    </div>
-</div>
 
 <div class="field">
     <div class="two columns alpha">
@@ -78,32 +62,6 @@ $view = get_view();
             address.
         </p>
         <?php echo $view->formTextarea('admin_notification_email_message_header', $admin_notification_email_message_header, array('rows' => '10', 'cols' => '60')); ?>
-    </div>
-</div>
-
- <div class="field">
-    <div class="two columns alpha">
-        <?php echo $view->formLabel('user_notification_email_subject', 'Email Subject (Public Notification)'); ?>
-    </div>
-    <div class="inputs five columns omega">
-        <p class="explanation">
-            The subject line of the confirmation email that is sent
-            to users who post messages through the form.
-        </p>
-        <?php echo $view->formText('user_notification_email_subject', $user_notification_email_subject); ?>
-    </div>
-</div>
-
- <div class="field">
-    <div class="two columns alpha">
-        <?php echo $view->formLabel('user_notification_email_message_header', 'Email Message (Public Notification)'); ?>
-    </div>
-    <div class="inputs five columns omega">
-        <p class="explanation">
-            The beginning of the confirmation email that is sent to
-            users who post messages through the form.
-        </p>
-        <?php echo $view->formTextarea('user_notification_email_message_header', $user_notification_email_message_header, array('rows' => '10', 'cols' => '60')); ?>
     </div>
 </div>
 
