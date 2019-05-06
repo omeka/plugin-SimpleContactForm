@@ -78,6 +78,7 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
             $mail = new Zend_Mail('UTF-8');
             $mail->setBodyText(get_option('simple_contact_form_admin_notification_email_message_header') . "\n\n" . $formMessage);
             $mail->setFrom($formEmail, $formName);
+            $mail->setReplyTo($formEmail, $formName);
             $mail->addTo($forwardToEmail);
             $mail->setSubject(get_option('site_title') . ' - ' . get_option('simple_contact_form_admin_notification_email_subject'));
             $mail->send();
@@ -89,6 +90,7 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
             $mail = new Zend_Mail('UTF-8');
             $mail->setBodyText(get_option('simple_contact_form_user_notification_email_message_header') . "\n\n" . $formMessage);
             $mail->setFrom($replyToEmail);
+            $mail->setReplyTo($replyToEmail);
             $mail->addTo($formEmail, $formName);
             $mail->setSubject(get_option('site_title') . ' - ' . get_option('simple_contact_form_user_notification_email_subject'));
             $mail->send();
