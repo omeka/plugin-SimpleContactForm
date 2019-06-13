@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @version $Id$
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @copyright Center for History and New Media, 2010
  * @package SimpleContactForm
@@ -13,7 +12,7 @@
  * @copyright Center for History and New Media, 2010
  * @package SimpleContactForm
  */
-// Define Constants.
+
 define('SIMPLE_CONTACT_FORM_PAGE_PATH', 'contact/');
 define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE', 'Contact Us');
 define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS', 'Please send us your comments and suggestions.');
@@ -74,7 +73,7 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
 
     /**
      * Adds 2 routes for the form and the thank you page.
-     **/
+     */
     function hookDefineRoutes($args)
     {
         $router = $args['router'];
@@ -120,12 +119,11 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         $contact_title = get_option('simple_contact_form_contact_page_title');
         $contact_add_to_navigation = get_option('simple_contact_form_add_to_main_navigation');
         if ($contact_add_to_navigation) {
-            //$nav[$contact_title] = uri(array(), 'simple_contact_form_form');
-                $nav[] = array(
-                    'label'   => $contact_title,
-                    'uri'     => url(array(),'simple_contact_form_form'),
-                    'visible' => true
-                );
+            $nav[] = array(
+                'label'   => $contact_title,
+                'uri'     => url(array(),'simple_contact_form_form'),
+                'visible' => true
+            );
         }
         return $nav;
     }
