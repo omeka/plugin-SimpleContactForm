@@ -65,6 +65,8 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
             delete_option('simple_contact_form_reply_from_email');
             delete_option('simple_contact_form_user_notification_email_subject');
             delete_option('simple_contact_form_user_notification_email_message_header');
+        }
+        if (version_compare($oldVersion, '1.1', '<')) {
             delete_option('simple_contact_form_admin_notification_email_subject');
             delete_option('simple_contact_form_admin_notification_email_message_header');
         }
