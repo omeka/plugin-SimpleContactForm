@@ -78,7 +78,7 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
             $mail->setBodyText(__('%s <%s> sent the following message:', $formName, $formEmail) . "\n\n" . $formMessage);
             $mail->setFrom($formEmail, $formName);
             $mail->addTo($forwardToEmail);
-            $mail->setSubject(get_option('site_title') . ' - ' . __('A User Has Contacted You')));
+            $mail->setSubject(get_option('site_title') . ' - ' . __('A User Has Contacted You'));
             $mail->send();
         }
     }
