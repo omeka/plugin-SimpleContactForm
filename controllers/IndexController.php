@@ -76,21 +76,10 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
         $forwardToEmail = get_option('simple_contact_form_forward_to_email');
         if (!empty($forwardToEmail)) {
             $mail = new Zend_Mail('UTF-8');
-            $mail->setBodyText(get_option('simple_contact_form_admin_notification_email_message_header') . "\n\n" . $formMessage);
+            $mail->setBodyText(__('%s <%s> sent the following message:', $formName, $formEmail) . "\n\n" . $formMessage);
             $mail->setFrom($formEmail, $formName);
             $mail->addTo($forwardToEmail);
             $mail->setSubject(get_option('site_title') . ' - ' . get_option('simple_contact_form_admin_notification_email_subject'));
-            $mail->send();
-        }
-
-        //notify the user who sent the message
-        $replyToEmail = get_option('simple_contact_form_reply_from_email');
-        if (!empty($replyToEmail)) {
-            $mail = new Zend_Mail('UTF-8');
-            $mail->setBodyText(get_option('simple_contact_form_user_notification_email_message_header') . "\n\n" . $formMessage);
-            $mail->setFrom($replyToEmail);
-            $mail->addTo($formEmail, $formName);
-            $mail->setSubject(get_option('site_title') . ' - ' . get_option('simple_contact_form_user_notification_email_subject'));
             $mail->send();
         }
     }

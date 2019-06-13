@@ -9,8 +9,6 @@ jQuery(document).ready(function () {
 
 <?php
 $forward_to_email                        = get_option('simple_contact_form_forward_to_email');	
-$admin_notification_email_subject        = get_option('simple_contact_form_admin_notification_email_subject');
-$admin_notification_email_message_header = get_option('simple_contact_form_admin_notification_email_message_header');
 $contact_page_title                      = get_option('simple_contact_form_contact_page_title');
 $contact_page_instructions               = get_option('simple_contact_form_contact_page_instructions');
 $thankyou_page_title                     = get_option('simple_contact_form_thankyou_page_title');
@@ -36,32 +34,6 @@ $view = get_view();
             be forwarded messages from your users.
         </p>
         <?php echo $view->formText('forward_to_email', $forward_to_email); ?>
-    </div>
-</div>
-
- <div class="field">
-    <div class="two columns alpha">
-        <?php echo $view->formLabel('admin_notification_email_subject', 'Email Subject (Admin Notification)'); ?>
-    </div>
-    <div class="inputs five columns omega">
-        <p class="explanation">
-            The subject line for the email that is sent to the Forward-To email
-            address.
-        </p>
-        <?php echo $view->formText('admin_notification_email_subject', $admin_notification_email_subject); ?>
-    </div>
-</div>
-
- <div class="field">
-    <div class="two columns alpha">
-        <?php echo $view->formLabel('admin_notification_email_message_header', 'Email Message (Admin Notification)'); ?>
-    </div>
-    <div class="inputs five columns omega">
-        <p class="explanation">
-            The beginning of the message that is sent to the Forward-To email
-            address.
-        </p>
-        <?php echo $view->formTextarea('admin_notification_email_message_header', $admin_notification_email_message_header, array('rows' => '10', 'cols' => '60')); ?>
     </div>
 </div>
 

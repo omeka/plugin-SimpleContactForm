@@ -19,8 +19,6 @@ define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE', 'Contact Us');
 define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS', 'Please send us your comments and suggestions.');
 define('SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE', 'Thank You For Your Feedback');
 define('SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE', 'We appreciate your comments and suggestions.');
-define('SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_SUBJECT', 'A User Has Contacted You');
-define('SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_MESSAGE_HEADER', 'A user has sent you the following message:');
 define('SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION', 1);
 
 
@@ -43,9 +41,7 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
 
    public function hookInstall()
     {
-        set_option('simple_contact_form_forward_to_email', get_option('administrator_email'));    
-        set_option('simple_contact_form_admin_notification_email_subject', SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_SUBJECT);
-        set_option('simple_contact_form_admin_notification_email_message_header', SIMPLE_CONTACT_FORM_ADMIN_NOTIFICATION_EMAIL_MESSAGE_HEADER);
+        set_option('simple_contact_form_forward_to_email', get_option('administrator_email'));   
         set_option('simple_contact_form_contact_page_title', SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE);
         set_option('simple_contact_form_contact_page_instructions', SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS);
         set_option('simple_contact_form_thankyou_page_title', SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE);
@@ -55,9 +51,7 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function hookUninstall()
     {
-        delete_option('simple_contact_form_forward_to_email');    
-        delete_option('simple_contact_form_admin_notification_email_subject');
-        delete_option('simple_contact_form_admin_notification_email_message_header');
+        delete_option('simple_contact_form_forward_to_email');
         delete_option('simple_contact_form_contact_page_title');
         delete_option('simple_contact_form_contact_page_instructions');
         delete_option('simple_contact_form_thankyou_page_title');
@@ -71,6 +65,8 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
             delete_option('simple_contact_form_reply_from_email');
             delete_option('simple_contact_form_user_notification_email_subject');
             delete_option('simple_contact_form_user_notification_email_message_header');
+            delete_option('simple_contact_form_admin_notification_email_subject');
+            delete_option('simple_contact_form_admin_notification_email_message_header');
         }
     }
 
@@ -110,8 +106,6 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $post = $args['post'];
         set_option('simple_contact_form_forward_to_email', $post['forward_to_email']);    
-        set_option('simple_contact_form_admin_notification_email_subject', $post['admin_notification_email_subject']);
-        set_option('simple_contact_form_admin_notification_email_message_header', $post['admin_notification_email_message_header']);
         set_option('simple_contact_form_contact_page_title', $post['contact_page_title']);
         set_option('simple_contact_form_contact_page_instructions',$post['contact_page_instructions']);
         set_option('simple_contact_form_thankyou_page_title', $post['thankyou_page_title']);
