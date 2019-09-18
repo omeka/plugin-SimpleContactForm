@@ -14,12 +14,6 @@
  */
 
 define('SIMPLE_CONTACT_FORM_PAGE_PATH', 'contact/');
-define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE', 'Contact Us');
-define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS', 'Please send us your comments and suggestions.');
-define('SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE', 'Thank You For Your Feedback');
-define('SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE', 'We appreciate your comments and suggestions.');
-define('SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION', 1);
-
 
 class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
 {
@@ -27,6 +21,7 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
         'install',
         'uninstall',
+        'initialize',
         'upgrade',
         'define_routes',
         'config_form',
@@ -38,14 +33,14 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         'public_navigation_main'
     );
 
-   public function hookInstall()
+    public function hookInstall()
     {
-        set_option('simple_contact_form_forward_to_email', get_option('administrator_email'));   
-        set_option('simple_contact_form_contact_page_title', SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE);
-        set_option('simple_contact_form_contact_page_instructions', SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS);
-        set_option('simple_contact_form_thankyou_page_title', SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE);
-        set_option('simple_contact_form_thankyou_page_message', SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE);    
-        set_option('simple_contact_form_add_to_main_navigation', SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION);    
+        set_option('simple_contact_form_forward_to_email', get_option('administrator_email'));
+        set_option('simple_contact_form_contact_page_title', __('Contact Us'));
+        set_option('simple_contact_form_contact_page_instructions', __('Please send us your comments and suggestions.'));
+        set_option('simple_contact_form_thankyou_page_title', __('Thank You For Your Feedback'));
+        set_option('simple_contact_form_thankyou_page_message', __('We appreciate your comments and suggestions.'));
+        set_option('simple_contact_form_add_to_main_navigation', 1);
     }
 
     public function hookUninstall()
@@ -55,6 +50,11 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         delete_option('simple_contact_form_contact_page_instructions');
         delete_option('simple_contact_form_thankyou_page_title');
         delete_option('simple_contact_form_add_to_main_navigation');    
+    }
+
+    public function hookInitialize()
+    {
+        add_translation_source(dirname(__FILE__) . '/languages');
     }
 
     public function hookUpgrade($args)

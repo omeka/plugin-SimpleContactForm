@@ -75,7 +75,7 @@ class SimpleContactForm_IndexController extends Omeka_Controller_AbstractActionC
         $forwardToEmail = get_option('simple_contact_form_forward_to_email');
         if (!empty($forwardToEmail)) {
             $mail = new Zend_Mail('UTF-8');
-            $mail->setBodyText(__('%s <%s> sent the following message:', $formName, $formEmail) . "\n\n" . $formMessage);
+            $mail->setBodyText(__('%1$s <%2$s> sent the following message:', $formName, $formEmail) . "\n\n" . $formMessage);
             $mail->setFrom($formEmail, $formName);
             $mail->addTo($forwardToEmail);
             $mail->setSubject(get_option('site_title') . ' - ' . __('A User Has Contacted You'));
