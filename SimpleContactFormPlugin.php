@@ -14,10 +14,10 @@
  */
 
 define('SIMPLE_CONTACT_FORM_PAGE_PATH', 'contact/');
-define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE', 'Contact Us');
-define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS', 'Please send us your comments and suggestions.');
-define('SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE', 'Thank You For Your Feedback');
-define('SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE', 'We appreciate your comments and suggestions.');
+define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_TITLE', __('Contact Us'));
+define('SIMPLE_CONTACT_FORM_CONTACT_PAGE_INSTRUCTIONS', __('Please send us your comments and suggestions.'));
+define('SIMPLE_CONTACT_FORM_THANKYOU_PAGE_TITLE', __('Thank You For Your Feedback'));
+define('SIMPLE_CONTACT_FORM_THANKYOU_PAGE_MESSAGE', __('We appreciate your comments and suggestions.'));
 define('SIMPLE_CONTACT_FORM_ADD_TO_MAIN_NAVIGATION', 1);
 
 
@@ -27,6 +27,7 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
         'install',
         'uninstall',
+		'initialize',
         'upgrade',
         'define_routes',
         'config_form',
@@ -55,6 +56,11 @@ class SimpleContactFormPlugin extends Omeka_Plugin_AbstractPlugin
         delete_option('simple_contact_form_contact_page_instructions');
         delete_option('simple_contact_form_thankyou_page_title');
         delete_option('simple_contact_form_add_to_main_navigation');    
+    }
+
+    public function hookInitialize()
+    {
+        add_translation_source(dirname(__FILE__) . '/languages');
     }
 
     public function hookUpgrade($args)
