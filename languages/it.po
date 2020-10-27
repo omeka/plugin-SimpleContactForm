@@ -1,0 +1,143 @@
+# Translation for the Simple Contact Form plugin for Omeka.
+# Copyright (C) 2019 Roy Rosenzweig Center for History and New Media
+# This file is distributed under the same license as the Omeka package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Daniele Binaghi, 2019
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SimpleContactForm\n"
+"Report-Msgid-Bugs-To: http://github.com/omeka/plugin-SimpleContactForm/issues\n"
+"POT-Creation-Date: 2019-10-15 16:21-0400\n"
+"PO-Revision-Date: 2019-10-15 20:33+0000\n"
+"Last-Translator: Daniele Binaghi, 2019\n"
+"Language-Team: Italian (https://www.transifex.com/omeka/teams/14184/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: SimpleContactFormPlugin.php:39
+msgid "Contact Us"
+msgstr "Contattaci"
+
+#: SimpleContactFormPlugin.php:40
+msgid "Please send us your comments and suggestions."
+msgstr "Per favore, inviaci i tuoi commenti e suggerimenti."
+
+#: SimpleContactFormPlugin.php:41
+msgid "Thank You For Your Feedback"
+msgstr "Grazie per i tuoi commenti"
+
+#: SimpleContactFormPlugin.php:42
+msgid "We appreciate your comments and suggestions."
+msgstr "Apprezziamo i tuoi commenti e suggerimenti."
+
+#: config_form.php:24
+#, php-format
+msgid ""
+"You have not entered your <a href=\"%1$s\">reCAPTCHA</a> API keys under <a "
+"href=\"%2$s\">security settings</a>. We recommend adding these keys, or the "
+"contact form will be vulnerable to spam."
+msgstr ""
+"Non hai inserito la chiave API <a href=\"%1$s\">1reCAPTCHA1</a> nelle <a "
+"href=\"%2$s\">impostazioni di sicurezza</a>. Raccomandiamo di inserire tali "
+"chiavi, o il modulo di contatto risulterà vulnerabile allo spam."
+
+#: config_form.php:34
+msgid "Forward-To Email"
+msgstr "Indirizzo e-mail inoltro"
+
+#: config_form.php:38
+msgid ""
+"The email address that receives notifications that someone has submitted a "
+"message through the contact form. If blank, you will not be forwarded "
+"messages from your users."
+msgstr ""
+"L'indirizzo e-mail che riceve notifiche quando qualcuno invia un messaggio "
+"tramite il modulo di contatto. Se vuoto, non verranno inoltrati messaggi "
+"dagli utenti."
+
+#: config_form.php:46
+msgid "Contact Page Title"
+msgstr "Titolo pagina Contattaci"
+
+#: config_form.php:50
+msgid "The title of the contact form (not HTML)."
+msgstr "Il titolo del modulo di contatto (non HTML)"
+
+#: config_form.php:58
+msgid "Instructions for Contact Page"
+msgstr "Istruzioni per la pagina Contattaci"
+
+#: config_form.php:62
+msgid "Any specific instructions to add to the contact form."
+msgstr "Qualsiasi istruzione specifica da aggiungere al modulo di contatto."
+
+#: config_form.php:70
+msgid "Add to Main Navigation"
+msgstr "Aggiungi alla navigazione principale"
+
+#: config_form.php:74
+msgid ""
+"If checked, add a link to the contact form to the main site navigation."
+msgstr ""
+"Se selezionata, aggiunge un collegamento al modulo di contatto alla "
+"navigazione principale del sito."
+
+#: config_form.php:82
+msgid "Thank You Page Title"
+msgstr "Titolo pagina di ringraziamento"
+
+#: config_form.php:86
+msgid "The title of the Thank You page (not HTML)."
+msgstr "Il titolo della pagina di ringraziamento (non HTML)."
+
+#: config_form.php:94
+msgid "Thank You Page Message"
+msgstr "Messaggio pagina di ringraziamento"
+
+#: config_form.php:98
+msgid "The text displayed on the Thank You page."
+msgstr "Il testo visualizzato nella pagina di ringraziamento."
+
+#: controllers/IndexController.php:53
+msgid "Your CAPTCHA submission was invalid, please try again."
+msgstr "Il CAPTCHA che hai inserito non era valido, per favore riprova."
+
+#: controllers/IndexController.php:56
+msgid "Please enter a valid email address."
+msgstr "Per favore, inserisci un indirizzo e-mail valido."
+
+#: controllers/IndexController.php:59
+msgid "Please enter a message."
+msgstr "Per favore, inserisci un messaggio."
+
+#: controllers/IndexController.php:78
+#, php-format
+msgid "%1$s <%2$s> sent the following message:"
+msgstr "%1$s <%2$s> ha inviato il seguente messaggio:"
+
+#: controllers/IndexController.php:81
+msgid "A User Has Contacted You"
+msgstr "Un utente ti ha contattato"
+
+#: views/public/index/index.php:12
+msgid "Your Name:"
+msgstr "Il tuo nome:"
+
+#: views/public/index/index.php:19
+msgid "Your Email:"
+msgstr "Il tuo indirizzo e-mail:"
+
+#: views/public/index/index.php:26
+msgid "Your Message:"
+msgstr "Il tuo messaggio:"
+
+#: views/public/index/index.php:39
+msgid "Send Message"
+msgstr "Invia messaggio"
