@@ -4,8 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# John Flatness <john@zerocrates.org>, 2019
-# Kai Metsävainio <kai.metsavainio@gmail.com>, 2021
+# Tierra Común, 2021
 # 
 #, fuzzy
 msgid ""
@@ -14,30 +13,29 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-SimpleContactForm/issues\n"
 "POT-Creation-Date: 2019-10-15 16:21-0400\n"
 "PO-Revision-Date: 2019-10-15 20:33+0000\n"
-"Last-Translator: Kai Metsävainio <kai.metsavainio@gmail.com>, 2021\n"
-"Language-Team: Finnish (Finland) (https://www.transifex.com/omeka/teams/14184/fi_FI/)\n"
+"Last-Translator: Tierra Común, 2021\n"
+"Language-Team: Spanish (https://www.transifex.com/omeka/teams/14184/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi_FI\n"
+"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: SimpleContactFormPlugin.php:39
 msgid "Contact Us"
-msgstr "Ota yhteyttä"
+msgstr "Contáctanos"
 
 #: SimpleContactFormPlugin.php:40
 msgid "Please send us your comments and suggestions."
-msgstr ""
-"Kuuntelemme mielellämme ehdotuksiasi ja toiveitasi sivuston kehittämisestä."
+msgstr "Por favor envía tus comentarios y sugerencias."
 
 #: SimpleContactFormPlugin.php:41
 msgid "Thank You For Your Feedback"
-msgstr "Kiitos yhteydenotosta."
+msgstr "Gracias Por Tu Retroalimentación."
 
 #: SimpleContactFormPlugin.php:42
 msgid "We appreciate your comments and suggestions."
-msgstr "Kiitos yhteydenotostasi. Otamme tarvittaessa yhteyttä."
+msgstr "Apreciamos tus comentarios y sugerencias."
 
 #: config_form.php:24
 #, php-format
@@ -46,12 +44,14 @@ msgid ""
 "href=\"%2$s\">security settings</a>. We recommend adding these keys, or the "
 "contact form will be vulnerable to spam."
 msgstr ""
-"Et ole syöttänyt <a href=\"%1$s\">reCAPTCHA</a> API-avaimia <a "
-"href=\"%2$s\">turvallisuusasetuksiin</a>."
+"No ha ingresado sus claves <a href=\"%1$s\">reCaptcha</a> API bajo <a "
+"href=\"%2$s\">configuraciones de seguridad</a>. Le recomendamos que añada "
+"estas claves, o el formulario de contribución será vulnerable al correo "
+"basura."
 
 #: config_form.php:34
 msgid "Forward-To Email"
-msgstr "Edelleenlähetysosoite"
+msgstr "Reenvía a correo electrónico."
 
 #: config_form.php:38
 msgid ""
@@ -59,84 +59,87 @@ msgid ""
 "message through the contact form. If blank, you will not be forwarded "
 "messages from your users."
 msgstr ""
-"Ylläpidon sähköpostiosoite johon lähetetään ilmoitus palautelomakkeella "
-"lähetetystä viesteistä. Jos osoite on tyhjä, ilmoituksia ei lähetetä."
+"La dirección de correo que recibe las notificaciones que alguien ha enviado "
+"un mensaje por medio del formulario de contacto. Si se deja vacío, no serán "
+"reenviados los mensajes de los usuarios."
 
 #: config_form.php:46
 msgid "Contact Page Title"
-msgstr "Yhteydenottosivun otsikko"
+msgstr "Título de la Página de Contactos"
 
 #: config_form.php:50
 msgid "The title of the contact form (not HTML)."
-msgstr "Sivun otsikko (ei HTML-koodia)"
+msgstr "El título del formulario de contacto (no HTML)"
 
 #: config_form.php:58
 msgid "Instructions for Contact Page"
-msgstr "Yhteydenottosivun tekstisisältö"
+msgstr "Instrucciones para la Página de Contacto"
 
 #: config_form.php:62
 msgid "Any specific instructions to add to the contact form."
-msgstr "Yhteydenottosivulla näytettävät lisäohjeet tai muu sisältö."
+msgstr ""
+"Cualquier instrucción específica para agregar al formulario de contacto."
 
 #: config_form.php:70
 msgid "Add to Main Navigation"
-msgstr "Lisää päävalikkoon"
+msgstr "Agregar a Navegación Principal"
 
 #: config_form.php:74
 msgid ""
 "If checked, add a link to the contact form to the main site navigation."
-msgstr "Valinta lisää linkin yhteydenottolomakkeeseen sivuston päävalikkoon."
+msgstr ""
+"Si se selecciona, añade un enlace al formulario de contacto en la navegación"
+" del sitio principal."
 
 #: config_form.php:82
 msgid "Thank You Page Title"
-msgstr "Kiitossivun otsikko"
+msgstr "Título de la Página de Agradecimiento"
 
 #: config_form.php:86
 msgid "The title of the Thank You page (not HTML)."
-msgstr "Sivun otsikko (ei HTML-koodia)"
+msgstr "El título de la Página de Agradecimiento (no HTML)"
 
 #: config_form.php:94
 msgid "Thank You Page Message"
-msgstr "Kiitossivun sisältö"
+msgstr "Mensaje de la Página de Agradecimiento"
 
 #: config_form.php:98
 msgid "The text displayed on the Thank You page."
-msgstr "Kiitossivulla näytettävä sisältö."
+msgstr "El texto mostrado en la página de Agradecimiento."
 
 #: controllers/IndexController.php:53
 msgid "Your CAPTCHA submission was invalid, please try again."
-msgstr ""
-"Varmistustekstin sisältö oli virheellinen, ole hyvä ja yritä uudelleen."
+msgstr "Tu respuesta CAPTCHA es invalida, intenta de nuevo."
 
 #: controllers/IndexController.php:56
 msgid "Please enter a valid email address."
-msgstr "Sähköpostiosoiteessa on virhe."
+msgstr "Por favor introduce una dirección de correo válida."
 
 #: controllers/IndexController.php:59
 msgid "Please enter a message."
-msgstr "Kirjoita viesti."
+msgstr "Por favor introduce un mensaje."
 
 #: controllers/IndexController.php:78
 #, php-format
 msgid "%1$s <%2$s> sent the following message:"
-msgstr "%1$s <%2$s> lähetä seuraava viesti:"
+msgstr "%1$s<%2$s> envió el siguiente mensaje:"
 
 #: controllers/IndexController.php:81
 msgid "A User Has Contacted You"
-msgstr "Sivuston käyttäjä on lähettänyt viestin"
+msgstr "Un Usuario se ha Puesto en Contacto"
 
 #: views/public/index/index.php:12
 msgid "Your Name:"
-msgstr "Nimi:"
+msgstr "Tu Nombre:"
 
 #: views/public/index/index.php:19
 msgid "Your Email:"
-msgstr "Sähköpostiosoite:"
+msgstr "Tu Dirección de Correo Electrónico:"
 
 #: views/public/index/index.php:26
 msgid "Your Message:"
-msgstr "Viesti:"
+msgstr "Tu Mensaje:"
 
 #: views/public/index/index.php:39
 msgid "Send Message"
-msgstr "Lähetä"
+msgstr "Enviar Mensaje"
